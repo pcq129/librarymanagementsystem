@@ -21,12 +21,27 @@ session_start();
             <a href="#" class="navbar-brand">
                 Library Management System
             </a>
-            <button id="Admin" class="nav-item btn btn-danger rounded border-0  m-4 ">Admin Login</button>
         </nav>
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <img src="..." class="rounded me-2" alt="...">
+                    <strong class="me-auto">Error</strong>
+                    <small></php echo time();?></small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    Please enter valid email id and other credentials.
+                </div>
+            </div>
+        </div>
         <div class="row h-100 d-flex align-content-center justify-content-center">
 
             <div class="col  d-flex align-items-center justify-content-center">
                 <div>
+                    <div class="d-flex justify-content-center mb-3">
+                        <img class="rounded logo" src="../assets/logo.png">
+                    </div>
                     <div class="d-flex justify-content-center mb-3">
                         <h2 class="Heading fw-bolder text-info-emphasis">User Login</h2>
                     </div>

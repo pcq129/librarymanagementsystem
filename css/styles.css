@@ -1,11 +1,17 @@
-*{
+/* * {
   margin: 0px;
   padding: 0px;
+} */
+
+/* body {
+  /* height: 100vh; */
+/* display: flex; */
+
+.logo {
+  height: 100px !important;
+  width: 100px;
 }
 
-body{
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.searchbar {
+  height: 40px !important;
 }

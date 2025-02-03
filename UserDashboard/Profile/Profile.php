@@ -36,7 +36,7 @@ $username = $_SESSION['name'];
                         <h2 class="fw-bolder text-info-emphasis">Update Pofile</h2>
                     </div>
                     <div class="d-flex justify-content-center mb-2">
-                        <h5>Please create your library credentials</h5>
+                        <h5>Please enter your new library credentials</h5>
                     </div>
                     <form action='Update.php' method="POST">
                         <div class="mb-3">
@@ -45,7 +45,7 @@ $username = $_SESSION['name'];
                         </div>
                         <div class="mb-3">
                             <label for="MobileNo" class="form-label">MobileNo</label>
-                            <input type="number" name="mobileno" class="form-control" id="exampleInputEmail1" aria-describedby="Mobile Number" required>
+                            <input type="number" name="MobileNo" class="form-control" id="exampleInputEmail1" aria-describedby="Mobile Number" required>
                         </div>
                         <div class="mb-3">
                             <label for="Address" class="form-label">Residential Address</label>
@@ -56,10 +56,10 @@ $username = $_SESSION['name'];
                             <input type="text" name="email" class=" form-control" id="email" aria-describedby="emailHelp" required disabled>
                             email cannot be updated due to security reasons.
                         </div>
-                        <div class="mb-3">
+                        <!-- <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
                             <input type="password" name="password" class="form-control" id="password" required>
-                        </div>
+                        </div> -->
                         <!-- <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="exampleCheck1">
                             <label class="form-check-label" for="exampleCheck1">Check me out</label>

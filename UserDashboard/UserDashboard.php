@@ -22,11 +22,11 @@ $username = $_SESSION['name'];
             <a href="#" class="navbar-brand">
                 Library Management System
             </a>
-            
+
             <?php
             echo "<div class='nav-item fw-bold ms-auto'>$username</div>";
-            ?>   
-            <a class=" btn btn-danger rounded border-0  m-4 nav-item"  href="logout.php">Logout</a>    
+            ?>
+            <a class=" btn btn-danger rounded border-0  m-4 nav-item" href="logout.php">Logout</a>
             <!-- <form action="logout.php" method="POST" id="Logout" class="nav-item">
                 <button class=" btn btn-danger rounded border-0  m-4 ">Logout</button>
             </form> -->
@@ -34,7 +34,7 @@ $username = $_SESSION['name'];
         <div class="row h-100 d-flex align-content-center justify-content-center bg-body">
             <div class="row mb-3 ms-auto me-auto">
                 <div class="card">
-                    
+
                     <div class="card-body">
                         <h5 class="card-title">Issue Books</h5>
                         <p class="card-text">Search and issue books from the library</p>
@@ -57,6 +57,15 @@ $username = $_SESSION['name'];
                         <h5 class="card-title">Edit Profile</h5>
                         <p class="card-text">Perform changes in profile details</p>
                         <a href="Profile/Profile.php" class="btn btn-primary">Edit profile</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3 ms-auto me-auto">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Update Credentials</h5>
+                        <p class="card-text">Perform changes to passwords</p>
+                        <a href="Profile/Password.php" class="btn btn-primary">Change password</a>
                     </div>
                 </div>
             </div>
