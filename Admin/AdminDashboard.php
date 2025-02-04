@@ -1,7 +1,5 @@
 <?php
-session_start();
-
-$adminName = $_SESSION["name"];
+include '../session_start.php';
 ?>
 
 <!DOCTYPE html>

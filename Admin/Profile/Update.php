@@ -13,12 +13,8 @@
 
 <body>
     <div class="container-fluid h-100" >
-        <nav class="navbar position-fixed w-100">
-                    <a href="#" class="navbar-brand" >
-                        Library Management System
-                    </a>
-                    <a href="admin.php" class="nav-item border-bottom border-2 m-4 border-light-subtle">Logout</a>
-        </nav>
+    <?php include '../../navbar.php' ?>
+
         <div class="row h-100 d-flex align-content-center justify-content-center">
             
             <div class="col  d-flex align-items-center justify-content-center">

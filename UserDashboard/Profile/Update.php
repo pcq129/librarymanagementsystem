@@ -33,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
         $sqlUpdate = "update `users` set name='$name' , mobileno='$MobileNo', address = '$address' where email = '$id'";
         $query_run = mysqli_query($connection, $sqlUpdate);
         echo "<h4>Data updated successfully</h4>";
+        echo '<br><a href="../UserDashboard.php">Return to dashboard</a>';
     } else {
         echo "<div class='text-danger'>Error : Enter all the details</div>";
     }
