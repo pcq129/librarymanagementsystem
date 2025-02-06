@@ -26,7 +26,7 @@ include '../connection.php';
                     Library Management System
                 </a>
                 <form class="nav-item w-50 d-flex align-items-center justify-content-center" method="post" action="search.php">
-                    <input type="text" name="search" class="rounded-2 w-75  border searchbar border-2 ">
+                    <input type="text" name="search" class="rounded-2 w-75 m-2 p-2  border searchbar border-2 " placeholder="Enter book name to search">
 
                     <button type="submit" class="ms-4 btn btn-danger rounded-pill">Search</button>
                 </form>
@@ -41,7 +41,9 @@ include '../connection.php';
         </nav>
 
         <div class="row">
-            <div class="ms-4 col-2 float-start h-100">
+
+            <!-- extra feature for filtering books -->
+            <!-- <div class="ms-4 col-2 float-start h-100">
 
                 <?php
                 if (isset($_POST['search']) && isset($_POST['search'])) {
@@ -67,17 +69,16 @@ include '../connection.php';
                                     echo '<div class="d-flex"><input type="submit" class="button rounded-pill bg-danger ms-4 h-25 w-25 border-0"></div></form>';
                                 }
                                     ?>
-            </div>
+            </div> -->
 
 
 
-            <div class="col">
+            <div class="ms-5">
                 <?php
 
                     if ($data->{'num_rows'}) {
                         echo '<h3>Results found for </h3>
-                        <h2>filter</h2>
-                        <table class="col-6 data-table w-100">
+                        <table class="data-table w-100 ms-3">
                         
                         
                         <thead>
@@ -100,7 +101,7 @@ include '../connection.php';
                                 <input type="hidden" id="bookID" name="booksID" value="<?= $row['booksID'] ?>">
 
                                 <td>
-                                    <input type='submit' class="btn btn-danger rounded-pill border-0">
+                                    <input type='submit' class="btn btn-danger rounded-pill border-0 my-2 mb-2" value="issue">
                                 </td>
                             </form>
                         </tr>

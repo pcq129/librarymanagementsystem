@@ -1,0 +1,87 @@
+-- Generating authors data
+INSERT INTO authors (authorID, author_name) VALUES
+(1000, 'J.K. Rowling'),
+(1001, 'George Orwell'),
+(1002, 'J.R.R. Tolkien'),
+(1003, 'Jane Austen'),
+(1004, 'Mark Twain'),
+(1005, 'Ernest Hemingway'),
+(1006, 'Agatha Christie'),
+(1007, 'Stephen King'),
+(1008, 'Leo Tolstoy'),
+(1009, 'Charles Dickens');
+
+-- Generating categories data
+INSERT INTO category (catID, cat_name) VALUES
+(2000, 'Fiction'),
+(2001, 'Non-Fiction'),
+(2002, 'Mystery'),
+(2003, 'Science Fiction'),
+(2004, 'Biography'),
+(2005, 'Fantasy'),
+(2006, 'History'),
+(2007, 'Romance'),
+(2008, 'Thriller'),
+(2009, 'Self-Help');
+
+-- Generating books data with authorID (catID removed)
+INSERT INTO books (booksID, book_name, authorID) VALUES
+(3000, 'The Great Gatsby', 1000),
+(3001, '1984', 1001),
+(3002, 'To Kill a Mockingbird', 1002),
+(3003, 'Pride and Prejudice', 1003),
+(3004, 'Moby Dick', 1004),
+(3005, 'War and Peace', 1005),
+(3006, 'The Catcher in the Rye', 1006),
+(3007, 'Brave New World', 1007),
+(3008, 'The Hobbit', 1008),
+(3009, 'Crime and Punishment', 1009),
+(3010, 'Fahrenheit 451', 1001),
+(3011, 'The Lord of the Rings', 1002),
+(3012, 'Great Expectations', 1009),
+(3013, 'Dracula', 1004),
+(3014, 'Frankenstein', 1005),
+(3015, 'The Picture of Dorian Gray', 1006),
+(3016, 'Wuthering Heights', 1003),
+(3017, 'Alice’s Adventures in Wonderland', 1000),
+(3018, 'Les Misérables', 1009),
+(3019, 'Sherlock Holmes', 1006);
+
+-- Generating book-category relationships
+INSERT INTO bookcategory (ID, bookID, catID) VALUES
+(4000, 3000, 2000),
+(4001, 3001, 2003),
+(4002, 3002, 2000),
+(4003, 3003, 2007),
+(4004, 3004, 2000),
+(4005, 3005, 2006),
+(4006, 3006, 2000),
+(4007, 3007, 2003),
+(4008, 3008, 2005),
+(4009, 3009, 2006);
+
+-- Generating users data
+INSERT INTO users (userID, name, email, password, mobile) VALUES
+(5000, 'Alice', 'mailto:alice@example.com', 'pass123', 9876543210),
+(5001, 'Bob', 'mailto:bob@example.com', 'secure456', 8765432109),
+(5002, 'Charlie', 'mailto:charlie@example.com', 'library789', 7654321098),
+(5003, 'David', 'mailto:david@example.com', 'readbooks', 6543210987),
+(5004, 'Emma', 'mailto:emma@example.com', 'mypassword', 5432109876),
+(5005, 'Frank', 'mailto:frank@example.com', 'pass123', 4321098765),
+(5006, 'Grace', 'mailto:grace@example.com', 'secure456', 3210987654),
+(5007, 'Hannah', 'mailto:hannah@example.com', 'library789', 2109876543),
+(5008, 'Ian', 'mailto:ian@example.com', 'readbooks', 1098765432),
+(5009, 'Jack', 'mailto:jack@example.com', 'mypassword', 1987654321);
+
+-- Generating issued books data
+INSERT INTO issued_book (issueID, userID, bookID, issue_date, return_date) VALUES
+(6000, 5000, 3000, '2024-01-10', '2024-02-10'),
+(6001, 5001, 3001, '2024-01-15', '2024-02-15'),
+(6002, 5002, 3002, '2024-01-20', '2024-02-20'),
+(6003, 5003, 3003, '2024-01-25', '2024-02-25'),
+(6004, 5004, 3004, '2024-01-30', '2024-02-28'),
+(6005, 5005, 3005, '2024-02-05', '2024-03-05'),
+(6006, 5006, 3006, '2024-02-10', '2024-03-10'),
+(6007, 5007, 3007, '2024-02-15', '2024-03-15'),
+(6008, 5008, 3008, '2024-02-20', '2024-03-20'),
+(6009, 5009, 3009, '2024-02-25', '2024-03-25');

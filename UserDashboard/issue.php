@@ -15,10 +15,22 @@ if (isset($_SESSION['id'])) {
             $fetchBook = mysqli_query($connection, $fetchBookQuery);
             $fetchBookData = mysqli_fetch_assoc($fetchBook);
             $book_name = $fetchBookData['book_name'];
+            $date = date("d-m-Y");
 
-            $issueBookQuery = 'insert into issued_book ( book_id, book_name, studentID, status) values (' . $book_id . ',"' . $book_name . '",' . $student_id . ',"requested" )';
-            $issuedBook = mysqli_query($connection, $issueBookQuery);
-            header('location:search.php');
+            $quantityQuery = "select quantity from books where booksID = $book_id";
+            $quantity = mysqli_query($connection, $quantityQuery);
+            $quantityNo = mysqli_fetch_assoc($quantity);
+
+            if ($quantityNo['quantity'] > 0) {
+                $issueBookQuery = 'insert into issued_book ( book_id, book_name, studentID, status, issue_date) values (' . $book_id . ',"' . $book_name . '",' . $student_id . ',"requested","' . $date . '")';
+                $issuedBook = mysqli_query($connection, $issueBookQuery);
+                $newQuantity = $quantityNo['quantity'] - 1;
+                exit();
+                $updateQuantityQuery = "update books quantity = $newQuantity where booksID = $book_id";
+                header('location:search.php');
+            } else {
+                echo "no more copies of books available";
+            }
         } else { ?>
             <center>
                 <h1>User have already issued one book</h1>

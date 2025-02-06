@@ -1,4 +1,4 @@
-<?php include '../header.php' ?>
+<?php include 'headerAdmin.php' ?>
 <div class="row">
     <!-- <div class="col-2">
                 <h2>Filters</h2>
@@ -6,7 +6,7 @@
     <div class=" ms-3 col">
 
         <?php
-        include 'fetchIssuedBooks.php';
+        include 'fetchRequest.php';
         ?>
     </div>
 </div>
