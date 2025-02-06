@@ -11,7 +11,7 @@ include 'headerAuth.php';
         <div class="d-flex justify-content-center mb-2">
             <h5>Please create your library credentials</h5>
         </div>
-        <form action='register.php' method="POST">
+        <form action='register.php' id='signUp' method="POST">
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
                 <input type="text" name="name" class="form-control" id="name" aria-describedby="Name" required>
@@ -33,13 +33,39 @@ include 'headerAuth.php';
                 <input type="password" id="password" name="password" class="form-control" id="password" required>
             </div>
             <div class="mb-3">
-                <label for="password" class="form-label">Confirm Password</label>
+                <label for="confirmPassword" class="form-label">Confirm Password</label>
                 <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" id="confirmPassword" required>
             </div>
+            <span id="noMatch"></span>
             <div class="d-flex justify-content-center">
-                <button type="submit" name="submit" class="btn btn-secondary rounded">Sign Up</button>
+                <button type="submit" name="submit" id="submitCredentials" class="btn btn-secondary rounded">Sign Up</button>
             </div>
         </form>
+        <script>
+            document.getElementById('signUp').addEventListener('input', function() {
+                validateForm();
+            });
+
+            function validateForm() {
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                const errorElement = document.getElementById('noMatch');
+                const submitCredentials = document.getElementById('submitCredentials')
+                let isValid = true;
+
+
+                if (password !== confirmPassword) {
+                    errorElement.innerHTML = 'confirmation password not matching';
+                    errorElement.classList.add('text-danger');
+                    submitCredentials.classList.add('disabled');
+                    isValid = false;
+                } else {
+
+                    errorElement.innerHTML = '';
+                    submitCredentials.classList.remove('disabled');
+                }
+            }
+        </script>
 
     </div>
 </div>

@@ -32,8 +32,11 @@ include '../session_start.php';
 
                 <?php
                 include '../connection.php';
-                $username = "select name from admin where email ='$email'";
+                $username = "select name from users where email ='$email'";
+                var_dump($username);
                 $usernameRaw = mysqli_fetch_assoc(mysqli_query($connection, $username));
+                var_dump($usernameRaw);
+
                 echo "<div class='nav-item fw-bold ms-auto'>$usernameRaw[name]</div>";
                 ?>
                 <a class=" btn btn-danger rounded border-0  m-4 nav-item" href="logout.php">Logout</a>

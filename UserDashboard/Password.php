@@ -24,19 +24,38 @@ include "../header.php";
                     <label for="password" class="form-label">Confirm Password</label>
                     <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" id="confirmPassword" required>
                 </div>
-                <!-- <script>
-                    import {
-                        validateForm
-                    } from "../js/custom.js";
-                    document.getElementById('updatePass').addEventListener('input', function() {
-                        validateForm();
-                    });
-                </script> -->
-
+                <span id="noMatch"></span>
                 <div class="d-flex justify-content-center">
-                    <button type="submit" name="submit" class="btn btn-secondary rounded">Update</button>
+                    <button type="submit" name="submit" id="submitCredentials" class="btn btn-secondary rounded">Update</button>
                 </div>
             </form>
+            <script>
+                document.getElementById('updatePass').addEventListener('input', function() {
+                    validateForm();
+                });
+
+                function validateForm() {
+                    const password = document.getElementById('password').value;
+                    const confirmPassword = document.getElementById('confirmPassword').value;
+                    const errorElement = document.getElementById('noMatch');
+                    const submitCredentials = document.getElementById('submitCredentials')
+                    let isValid = true;
+
+
+                    if (password !== confirmPassword) {
+                        errorElement.innerHTML = 'confirmation password not matching';
+                        errorElement.classList.add('text-danger');
+                        submitCredentials.classList.add('disabled');
+                        isValid = false;
+                    } else {
+
+                        errorElement.innerHTML = '';
+                        submitCredentials.classList.remove('disabled');
+                    }
+                }
+            </script>
+
+
 
             <?php
             // var_dump($_SERVER);

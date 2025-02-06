@@ -22,9 +22,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
             $query = "select * from users where `email`='$email'";
             $query_run = mysqli_query($connection, $query);
             $rowextr = mysqli_fetch_assoc($query_run);
-            var_dump($rowextr);
-            echo "<br>";
-            var_dump($query_run);
+            // var_dump($rowextr);
+            // echo "<br>";
+            // var_dump($query_run);
             // exit();
             if (!$rowextr) {
 
@@ -41,7 +41,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                 }
             } else {
                 // header("Location:signup.php");
-                echo "email already registered";
+                echo "<h1>email already registered !! use different email or login</h1>";
+                echo '<a href="landingPage.php" class="btn btn-rounded">Return to Login page</a>';
+
                 // echo '<script>let text;
                 //         if (confirm("Email already exists") == true) {
                 //         window.location.href = "signup.php";;

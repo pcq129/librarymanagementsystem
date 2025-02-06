@@ -63,7 +63,7 @@ if (isset($_POST['login']) && $_POST['email'] && $_POST['password']) {
                         $_SESSION['name'] = $row['name'];
                         $_SESSION['email'] = $row['email'];
                         $_SESSION['id'] = $row['id'];
-                        if ($row['admin']) {
+                        if ($row['admin'] == 1) {
                             header("Location:../Admin/AdminDashboard.php");
                         } else {
                             header("Location:../UserDashboard/userDashboard.php");
@@ -72,11 +72,11 @@ if (isset($_POST['login']) && $_POST['email'] && $_POST['password']) {
                         echo "<br><br><center><span>Error (invalid credentials) </span></center>";
                     }
                 } else {
-                    echo "email not found";
+                    echo "<center><h1>exception</h1></center>";
                 }
             }
         } else {
-            echo "Email not found";
+            echo "<center><h1>email not found </h1></center>";
         }
     }
     if (mysqli_connect_errno()) {
