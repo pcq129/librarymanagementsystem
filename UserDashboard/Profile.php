@@ -5,7 +5,7 @@
     <div class="col  d-flex align-items-center justify-content-center">
         <div>
             <div class="d-flex justify-content-center mb-3">
-                <h2 class="fw-bolder text-info-emphasis">Update Pofile</h2>
+                <h2 class="fw-bolder text-info-emphasis">Update Profile</h2>
             </div>
             <div class="d-flex justify-content-center mb-2">
                 <h5>Please enter your new library credentials</h5>

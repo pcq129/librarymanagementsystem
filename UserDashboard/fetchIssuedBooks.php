@@ -5,7 +5,7 @@ include '../connection.php';
 
 if (isset($_SESSION['id'])) {
     $id = $_SESSION['id'];
-    $issuedBooksQuery = "select a.book_id, a.book_name, a.status, a.issue_date, a.return_date, c.author_name from issued_book as a inner join books as b on b.booksID = a.book_id inner join authors as c on c.authorID = b.authorID where studentID = $id order by a.status";
+    $issuedBooksQuery = "select a.bookId, a.bookName, a.status, a.issueDate, a.returnDate, c.authorName from issuedbook as a inner join books as b on b.bookId = a.bookId inner join authors as c on c.authorId = b.authorId where studentId = $id order by a.status desc";
     $issuedBooks = mysqli_query($connection, $issuedBooksQuery);
     // var_dump($issuedBooks->{'num_rows'});
     if ($issuedBooks->{'num_rows'} > 0) { ?>

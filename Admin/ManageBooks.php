@@ -25,6 +25,14 @@
                 </div>
             </div>
         </div>
+        <div class="row mb-3 ms-auto me-auto">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Issued books</h5>
+                    <a href="issuedBooks.php" class="btn btn-primary">View</a>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- <div class="col-2">
                 <h2>Filters</h2>

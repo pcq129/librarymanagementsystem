@@ -42,42 +42,28 @@ include '../connection.php';
 
         <div class="row">
 
-            <!-- extra feature for filtering books -->
-            <!-- <div class="ms-4 col-2 float-start h-100">
 
-                <?php
-                if (isset($_POST['search'])) {
-                    $search = $_POST['search'];
-                    $query = "select * from users where name = '$search'";
-                    $data = mysqli_query($connection, $query);
+            <?php
+            if (isset($_POST['search'])) {
+                $search = $_POST['search'];
+                $query = "select * from users where name = '$search'";
+                $data = mysqli_query($connection, $query);
 
 
-                    if (isset($_POST['search']) && $data->{'num_rows'}) {
-                ?><h3>Filters</h3><?php
-                                    $filterQuery = "SELECT distinct c.catName from books as b inner join authors as a on a.authorId=b.authorId INNER join category as c on c.categoryId=b.categoryId where b.bookName='$_POST[search]'";
-                                    $filters = mysqli_query($connection, $filterQuery);
-
-
-                                    echo '<form action="filter.php" method="post">';
-                                    while ($row = mysqli_fetch_assoc($filters)) {
-
-                                        echo  '<div class="form-check"><input class="form-check-input" type="checkbox" name="filters[]" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">' .
-                                            $row['catName'] .
-                                            '</label></div>';
-                                    }
-                                    echo '<div class="d-flex"><input type="submit" class="button rounded-pill bg-danger ms-4 h-25 w-25 border-0"></div></form>';
-                                }
-                                    ?>
-            </div> -->
+                if (isset($_POST['search']) && $data->{'num_rows'}) {
+                    $filterQuery = "SELECT distinct c.categoryName from books as b inner join authors as a on a.authorId=b.authorId INNER join category as c on c.categoryId=b.categoryId where b.bookName='$_POST[search]'";
+                    $filters = mysqli_query($connection, $filterQuery);
+                }
+            ?>
+        </div>
 
 
 
-            <div class="ms-5">
-                <?php
+        <div class="ms-5">
+            <?php
 
-                    if ($data->{'num_rows'}) {
-                        echo '<h3>Results found for </h3>
+                if ($data->{'num_rows'}) {
+                    echo '<h3>Results found for </h3>
                         <table class="data-table w-100 ms-3">
                         
                         
@@ -94,54 +80,54 @@ include '../connection.php';
                         </tr>
                         </thead>
                         <tbody>';
-                        while ($row = mysqli_fetch_assoc($data)) {
-                ?>
-                        <tr>
-                            <form action="issue.php" method="POST">
-                                <td><?= $row['id'] ?></td>
-                                <td><?= $row['name'] ?></td>
-                                <td><?= $row['email'] ?></td>
-                                <td><?= $row['mobile'] ?></td>
-                                <input type="hidden" id="studentID" name="studentID" value="<?= $row['id'] ?>">
-                                <td>
-                                    <div class="me-3"><select class="form-select" name="booksID" aria-label="Select Book" required>
-                                            <?php
-                                            $bookFetchQuery = 'select bookName, booksId  from books';
-                                            $bookFetch = mysqli_query($connection, $bookFetchQuery);
+                    while ($row = mysqli_fetch_assoc($data)) {
+            ?>
+                    <tr>
+                        <form action="issue.php" method="POST">
+                            <td><?= $row['id'] ?></td>
+                            <td><?= $row['name'] ?></td>
+                            <td><?= $row['email'] ?></td>
+                            <td><?= $row['mobile'] ?></td>
+                            <input type="hidden" id="studentID" name="studentID" value="<?= $row['id'] ?>">
+                            <td>
+                                <div class="me-3"><select class="form-select" name="booksID" aria-label="Select Book" required>
+                                        <?php
+                                        $bookFetchQuery = 'select bookName, bookId  from books';
+                                        $bookFetch = mysqli_query($connection, $bookFetchQuery);
 
-                                            while ($row = mysqli_fetch_assoc($bookFetch)) {
-                                            ?><option value="<?= $row['booksId'] ?>"><?= $row['bookName'] ?></option>><?php
-                                                                                                                    }
-                                                                                                                        ?>
-                                        </select>
-                                    </div>
-                                </td>
-                                <td class="dateInput">
-                                    <div>
-                                        <input type="date" name="returnDate" value="<?= date('Y-m-d', strtotime(date('Y-m-d') . '+15 days')) ?>">
-                                    </div>
-                                </td>
+                                        while ($row = mysqli_fetch_assoc($bookFetch)) {
+                                        ?><option value="<?= $row['bookId'] ?>"><?= $row['bookName'] ?></option>><?php
+                                                                                                                }
+                                                                                                                    ?>
+                                    </select>
+                                </div>
+                            </td>
+                            <td class="dateInput">
+                                <div>
+                                    <input type="date" name="returnDate" value="<?= date('Y-m-d', strtotime(date('Y-m-d') . '+15 days')) ?>">
+                                </div>
+                            </td>
 
-                                <td>
-                                    <input type='submit' class="btn btn-danger rounded-pill border-0 mt-2 mb-2" value="issue">
-                                </td>
-                            </form>
-                        </tr>
-                <?php
-                        }
-                        echo '</tbody>
-                        </table>';
-                    } else {
-                        echo '<h3 class="text-danger bg-danger-subtle border-4 border" >No result found</h3>';
+                            <td>
+                                <input type='submit' class="btn btn-danger rounded-pill border-0 mt-2 mb-2" value="issue">
+                            </td>
+                        </form>
+                    </tr>
+            <?php
                     }
-                ?>
-
-            </div>
-        <?php
+                    echo '</tbody>
+                        </table>';
+                } else {
+                    echo '<h3 class="text-danger bg-danger-subtle border-4 border" >No result found</h3>';
                 }
-        ?>
+            ?>
 
         </div>
+    <?php
+            }
+    ?>
+
+    </div>
     </div>
     </div>
 </body>

@@ -1,7 +1,7 @@
 <?php
 // this file is for validating and adding data to users table on new registrations.
 // model for signup
- 
+
 
 // include 'signup.php';
 // var_dump($_POST);
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
             $mobileno = $_POST['mobileno'];
             $address = $_POST['address'];
             $email = $_POST['email'];
-            $password = $_POST['password'];
+            $password = md5($_POST['password']);
 
 
             $query = "select * from users where `email`='$email'";
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
             if (!$rowextr) {
 
 
-                $sql = "insert into `users` (`name`,`email`,`password`,`mobileno`,`address`) values ('$name','$email','$password','$mobileno','$address')";
+                $sql = "insert into `users` (`name`,`email`,`password`,`mobile`,`address`) values ('$name','$email','$password','$mobileno','$address')";
 
                 $query = mysqli_query($connection, $sql);
 

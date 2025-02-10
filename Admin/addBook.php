@@ -3,18 +3,18 @@
 
 include '../session_start.php';
 if (isset($_SESSION['email'])) {
-    if (isset($_POST['Name']) && isset($_POST['Quantity']) && isset($_POST['Author']) && isset($_POST['Category']) && isset($_POST['Price'])) {
+    if (isset($_POST['Name']) && isset($_POST['Quantity']) && isset($_POST['Author']) && isset($_POST['categoryId']) && isset($_POST['Price'])) {
         include '../connection.php';
         //define variables
         $bookname = $_POST['Name'];
         $quantity = $_POST['Quantity'];
         $author = $_POST['Author'];
-        $category = $_POST['Category'];
+        $category = $_POST['categoryId'];
         $price = $_POST['Price'];
         //check if book already exists
-        $checkBookQuery = 'select  a.authorName, b.bookName, c.categoryName from books as b inner join authors as a on a.authorId = b.authorId inner join category as c on b.categoryId = c.categoryId where b.bookName= "' . $bookName . '" && c.catgoryName= "' . $category . '" && a.authorName= "' . $author . '"';
+        $checkBookQuery = 'select  a.authorName, b.bookName, c.categoryName from books as b inner join authors as a on a.authorId = b.authorId inner join category as c on b.categoryId = c.categoryId where b.bookName= "' . $bookname . '" && c.categoryId= "' . $category . '" && a.authorId= "' . $author . '"';
         $checkBook = mysqli_query($connection, $checkBookQuery);
-        print_r($_POST);
+        $checkBookRow = mysqli_fetch_assoc($checkBook);
 
 
 
@@ -58,6 +58,8 @@ if (isset($_SESSION['email'])) {
             echo "<h1>similar book already exists</h1>";
             echo '<a href="AdminDashboard.php" class="btn btn-rounded">Return to dashboard</a>';
         }
+    } else {
+        echo "error occured";
     }
 } else {
     echo "session not valid, please login";

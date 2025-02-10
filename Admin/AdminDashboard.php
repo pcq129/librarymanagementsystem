@@ -2,7 +2,7 @@
 include "headerAdmin.php";
 // homepage for user with admin privilages
 ?>
-<div class="row h-75 d-flex align-content-center justify-content-center bg-body">
+<div class="row d-flex align-content-center justify-content-center bg-body">
 
     <div class="row mb-3 ms-auto me-auto">
         <div class="card">
@@ -18,7 +18,7 @@ include "headerAdmin.php";
             <div class="card-body">
                 <h5 class="card-title">Manage Books</h5>
                 <p class="card-text">Return books to the library.</p>
-                <a href="ManageBooks.php" class="btn btn-primary">Update data</a>
+                <a href="ManageBooks.php" class="btn btn-primary">Books Data</a>
             </div>
         </div>
     </div>

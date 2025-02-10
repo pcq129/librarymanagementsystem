@@ -11,9 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
     if ($connection) {
         $db = mysqli_select_db($connection, $dbname);
 
-        $currentPassword = $_POST['currentPassword'];
-        $passwordinput = $_POST['password'];
-        $confirmPassword = $_POST['confirmPassword'];
+        $currentPassword = md5($_POST['currentPassword']);
+        $passwordinput =  md5($_POST['password']);
+        $confirmPassword =  md5($_POST['confirmPassword']);
         if (isset($_POST['password']) && isset($_POST['currentPassword']) && isset($_POST['confirmPassword'])) {
 
             //implement currentpassword verification.

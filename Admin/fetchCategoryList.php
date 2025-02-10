@@ -22,7 +22,7 @@ if (isset($_SESSION['id'])) {
                         ?><tr>
                             <form action="removeCategory.php" method="POST">
                                 <td><?= $row['categoryId'] ?></td>
-                                <input type="hidden" name="catID" id="catID" value="<?= $row['catID'] ?>">
+                                <input type="hidden" name="catID" id="catID" value="<?= $row['categoryId'] ?>">
                                 <td><?= $row['categoryName'] ?></td>
                                 <!-- <td><input class="btn btn-danger border-0 mt-2 mb-2" type="submit" value="Edit"></input></td> -->
                                 <td><input class="btn btn-danger border-0 mt-2 mb-2" type="submit" value="Remove"></input></td>

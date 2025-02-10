@@ -30,15 +30,15 @@ include 'headerAdmin.php';
                     </div>
                     <div class="mb-3">
                         <label for="Category" class="form-label">Category</label>
-                        <select class="form-select" name="Category" aria-label="Select Category" required>
+                        <select class="form-select" name="categoryId" aria-label="Select Category" required>
                             <?php
                             $categoryFetchQuery = 'select * from category';
                             $categoryFetch = mysqli_query($connection, $categoryFetchQuery);
 
                             while ($row = mysqli_fetch_assoc($categoryFetch)) {
                             ?><option value="<?= $row['categoryId'] ?>"><?= $row['categoryName'] ?></option>><?php
-                                                                                                }
-                                                                                                    ?>
+                                                                                                            }
+                                                                                                                ?>
                         </select>
                     </div>
                     <div class="mb-3">

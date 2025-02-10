@@ -4,8 +4,8 @@
 if (isset($_SESSION['id'])) {
     include "../connection.php";
 
-    // $fetchBookListQuery = "select a.booksID, a.book_name, a.quantity, b.author_name from books as a inner join authors as b on b.authorID = a.authorID";
-    $fetchUserListQuery = "select a.id, a.name, a.email, a.mobile, a.address from users as a where admin = 0";
+    // $fetchBookListQuery = "select a.bookId, a.book_name, a.quantity, b.author_name from books as a inner join authors as b on b.authorID = a.authorID";
+    $fetchUserListQuery = "select a.id, a.name, a.email, a.mobile, a.address from users as a where isAdmin = 0";
     $fetchUserList = mysqli_query($connection, $fetchUserListQuery);
 
     if ($fetchUserList->{'num_rows'} > 0) { ?>
@@ -16,7 +16,7 @@ if (isset($_SESSION['id'])) {
                     <td>User Name</td>
                     <td>User Email</td>
                     <td>Mobile No</td>
-                    <td colspan="2">Action</td>
+                    <td colspan="2">Actions</td>
                 </tr>
             </thead>
             <tbody><?php
@@ -32,8 +32,11 @@ if (isset($_SESSION['id'])) {
                             <td>
                                 <input class="btn btn-danger border-0 mt-2 me-2" type="submit" value="Remove"></input>
                             </td>
+                        </form>
+                        <form action="updateUserPassword.php" method="POST">
                             <td>
-                                <input class="btn btn-danger border-0 mt-2 me-2" type="submit" value="Edit"></input>
+                                <input type="hidden" name="userId" id="userID" value="<?= $row['id'] ?>">
+                                <input class="btn btn-danger rounded-pill border-0 mt-2 me-2" type="submit" value="Change Password"></input>
                             </td>
                         </form>
                     </tr>

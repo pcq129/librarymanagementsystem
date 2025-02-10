@@ -1,7 +1,6 @@
 <?php
 include '../session_start.php';
 include '../connection.php';
-print_r($_POST);
 
 
 ?>
@@ -43,86 +42,73 @@ print_r($_POST);
         </nav>
 
         <div class="row">
-
-            <!-- extra feature for filtering books -->
-            <!-- <div class="ms-4 col-2 float-start h-100">
+            <div class="ms-5">
 
                 <?php
-                echo "checking condition";
                 if (isset($_POST['search'])) {
-                    echo "checking condition";
 
                     $search = $_POST['search'];
-                    $query = "select books.bookName, books.booksId, authors.authorName, category.categoryName from books inner join authors on authors.authorId = books.authorId inner join category on category.categoryId = books.categoryId where books.bookName = '$_POST[search]'";
+                    $query = "select books.bookName, books.bookId, authors.authorName, category.categoryName from books inner join authors on authors.authorId = books.authorId inner join category on category.categoryId = books.categoryId where books.bookName = '$_POST[search]'";
                     $data = mysqli_query($connection, $query);
-                    print_r($data);
 
 
                     if (isset($_POST['search']) && $data->{'num_rows'}) {
-                ?><h3>Filters</h3><?php
-                                    $filterQuery = "SELECT distinct c.categoryName from books as b inner join authors as a on a.authorId=b.authorId INNER join category as c on c.categoryId=b.categoryId where b.bookName='$_POST[search]'";
-                                    $filters = mysqli_query($connection, $filterQuery);
+                        $filterQuery = "SELECT distinct c.categoryName from books as b inner join authors as a on a.authorId=b.authorId INNER join category as c on c.categoryId=b.categoryId where b.bookName='$_POST[search]'";
+                        $filters = mysqli_query($connection, $filterQuery);
 
-
-                                    echo '<form action="filter.php" method="post">';
-                                    while ($row = mysqli_fetch_assoc($filters)) {
-
-                                        echo  '<div class="form-check"><input class="form-check-input" type="checkbox" name="filters[]" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">' .
-                                            $row['categoryName'] .
-                                            '</label></div>';
-                                    }
-                                    echo '<div class="d-flex"><input type="submit" class="button rounded-pill bg-danger ms-4 h-25 w-25 border-0"></div></form>';
-                                }
-                                    ?>
-            </div> -->
-
-
-
-            <div class="ms-5">
-                <?php
-
-                    if ($data->{'num_rows'}) {
                         echo '<h3>Results found for </h3>
-                        <table class="data-table w-100 ms-3">
-                        
-                        
-                        <thead>
-                        <tr>
-                            <th>Book Name</th>
-                            <th>Author</th>
-                            <th>Book Category</th>
-                            <th></th>
+                    <table class="data-table w-100 ms-3">
+                    
+                    
+                    <thead>
+                    <tr>
+                        <th>Book Name</th>
+                        <th>Author</th>
+                        <th>Book Category</th>
+                        <th></th>
 
-                        </tr>
-                        </thead>
-                        <tbody>';
+                    </tr>
+                    </thead>
+                    <tbody>';
                         while ($row = mysqli_fetch_assoc($data)) {
                 ?>
-                        <tr>
-                            <form action="issue.php" method="POST">
-                                <td><?= $row['bookName'] ?></td>
-                                <td><?= $row['authorName'] ?></td>
-                                <td><?= $row['categoryName'] ?></td>
-                                <input type="hidden" id="bookID" name="booksID" value="<?= $row['booksId'] ?>">
+                            <tr>
+                                <form action="issue.php" method="POST">
+                                    <td><?= $row['bookName'] ?></td>
+                                    <td><?= $row['authorName'] ?></td>
+                                    <td><?= $row['categoryName'] ?></td>
+                                    <input type="hidden" id="bookID" name="booksID" value="<?= $row['bookId'] ?>">
 
-                                <td>
-                                    <input type='submit' class="btn btn-danger rounded-pill border-0 my-2 mb-2" value="issue">
-                                </td>
-                            </form>
-                        </tr>
-                <?php
+                                    <td>
+                                        <input type='submit' class="btn btn-danger rounded-pill border-0 my-2 mb-2" value="Request">
+                                    </td>
+                                </form>
+                            </tr>
+                    <?php
                         }
                         echo '</tbody>
-                        </table>';
+                    </table>';
                     } else {
                         echo '<h3 class="text-danger bg-danger-subtle border-4 border" >No result found</h3>';
                     }
-                ?>
+                    ?>
 
             </div>
         <?php
+
+
+                    // echo '<form action="filter.php" method="post">';
+                    // while ($row = mysqli_fetch_assoc($filters)) {
+
+                    //     echo  '<div class="form-check"><input class="form-check-input" type="checkbox" name="filters[]" id="flexCheckDefault">
+                    //         <label class="form-check-label" for="flexCheckDefault">' .
+                    //         $row['categoryName'] .
+                    //         '</label></div>';
+                    // }
+                    // echo '<div class="d-flex"><input type="submit" class="button rounded-pill bg-danger ms-4 h-25 w-25 border-0"></div></form>';
                 }
+
+
         ?>
 
         </div>

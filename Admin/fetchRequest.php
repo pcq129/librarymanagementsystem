@@ -4,7 +4,7 @@
 if (isset($_SESSION['id'])) {
     include "../connection.php";
 
-    $fetchBookListQuery = "select i.book_id, i.status, i.book_name, i.studentID, u.name, b.quantity, a.author_name from issued_book as i inner join users as u on u.id = i.studentID inner join books as b on i.book_id = b.booksID inner join authors as a on b.authorID = a.authorID where i.status = 'requested'; ";
+    $fetchBookListQuery = "select i.bookId, i.status, i.bookName, i.studentId, u.name, b.quantity, a.authorName from issuedBook as i inner join users as u on u.id = i.studentId inner join books as b on i.bookId = b.bookId inner join authors as a on b.authorId = a.authorId where i.status = 'requested'; ";
     $fetchBookList = mysqli_query($connection, $fetchBookListQuery);
 
     if ($fetchBookList->{'num_rows'} > 0) { ?>
@@ -25,7 +25,7 @@ if (isset($_SESSION['id'])) {
                 <tbody><?php
                         while ($row = mysqli_fetch_assoc($fetchBookList)) {
                         ?><tr>
-                            <form action="approve.php" method="POST">
+                            <form action="issue.php" method="POST">
                                 <td><?= $row['bookId'] ?></td>
                                 <input type="hidden" name="bookID" id="bookID" value="<?= $row['bookId'] ?>">
                                 <td><?= $row['bookName'] ?></td>

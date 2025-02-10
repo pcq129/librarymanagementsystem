@@ -8,7 +8,7 @@ if (isset($_POST['login']) && $_POST['email'] && $_POST['password']) {
     $connection = mysqli_connect('localhost', 'root', '', 'librarymanagementsystem');
     if ($connection) {
 
-        $password = $_POST['password'];
+        $password = md5($_POST['password']);
         $email = $_POST['email'];
         // echo "connected";
         $db = mysqli_select_db($connection, 'librarymanagementsystem');
@@ -68,7 +68,7 @@ if (isset($_POST['login']) && $_POST['email'] && $_POST['password']) {
                         $_SESSION['name'] = $row['name'];
                         $_SESSION['email'] = $row['email'];
                         $_SESSION['id'] = $row['id'];
-                        if ($row['admin'] == 1) {
+                        if ($row['isAdmin'] == 1) {
                             header("Location:../Admin/AdminDashboard.php");
                         } else {
                             header("Location:../UserDashboard/userDashboard.php");

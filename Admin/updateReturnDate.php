@@ -7,19 +7,15 @@ if (isset($_SESSION['email']) && isset($_POST['bookID']) && isset($_POST['studen
     //implementation
     $booksID = $_POST['bookID'];
     $studentID = $_POST['studentID'];
-    var_dump($booksID);
-    $date = date('Y-m-d');
 
-    $returnDate = date("Y-m-d", strtotime($date . '+ 15 days'));
-    var_dump($returnDate);
+    $returnDate = $_POST['returnDate'];
 
     //return date functionlity still pending, the below loc causes some error
-    $approveRequestQuery = "update issuedBook set status = 'issued', issueDate = '$date', returnDate = '$returnDate' where bookId = '$booksID' && studentId = $studentID ";
+    $approveRequestQuery = "update issuedBook set returnDate = '$returnDate' where bookId = '$booksID' && studentId = $studentID ";
     $approveRequest = mysqli_query($connection, $approveRequestQuery);
-    $setQuantity = "update books set quantity = quantity-1 where booksId = '$booksID'";
-    echo "<br>";
-    var_dump($approveRequest);
-    header('location:CheckRequest.php');
+    echo "<h1>return details updated successfully.</h1>";
+    echo '<a href="issuedBooks.php" class="btn btn-rounded">Return to issued books</a>';
+    // header('location:issuedBooks.php');
 } else {
     echo "error, no bookID passed";
 }
