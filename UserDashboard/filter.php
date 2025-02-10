@@ -2,7 +2,7 @@
         if (isset($_POST['filters'])) {
 
             $filterToApply = $_POST['filters'];
-            $updateWithFilter = "select * from $data where cat_name = $filter";
+            $updateWithFilter = "select * from $data where categorName = $filter";
             foreach ($filterToApply as $filter => $value) {
             }
         }

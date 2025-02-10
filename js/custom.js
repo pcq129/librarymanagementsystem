@@ -31,27 +31,26 @@
 // }
 
 
-console.log("running");
-
-
-document.getElementById('updatePass').addEventListener('input', function () {
+document.getElementById('signUp').addEventListener('input', function() {
     validateForm();
 });
 
-export function validateForm() {
+function validateForm() {
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirmPassword').value;
-    const errorElement = document.getElementById('passwordError');
+    const errorElement = document.getElementById('noMatch');
+    const submitCredentials = document.getElementById('submitCredentials')
     let isValid = true;
 
 
     if (password !== confirmPassword) {
-        console.log("dpmp");
-        
+        errorElement.innerHTML = 'confirmation password not matching';
+        errorElement.classList.add('text-danger');
+        submitCredentials.classList.add('disabled');
         isValid = false;
     } else {
-        
-        console.log("dpmp");
 
+        errorElement.innerHTML = '';
+        submitCredentials.classList.remove('disabled');
     }
 }

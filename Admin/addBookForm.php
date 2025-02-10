@@ -1,5 +1,6 @@
 <?php
 include 'headerAdmin.php';
+// view for adding book
 ?>
 
 <div class="row">
@@ -29,11 +30,30 @@ include 'headerAdmin.php';
                     </div>
                     <div class="mb-3">
                         <label for="Category" class="form-label">Category</label>
-                        <input type="text" name="Category" class="form-control" id="Category" aria-describedby="Category" required>
+                        <select class="form-select" name="Category" aria-label="Select Category" required>
+                            <?php
+                            $categoryFetchQuery = 'select * from category';
+                            $categoryFetch = mysqli_query($connection, $categoryFetchQuery);
+
+                            while ($row = mysqli_fetch_assoc($categoryFetch)) {
+                            ?><option value="<?= $row['categoryId'] ?>"><?= $row['categoryName'] ?></option>><?php
+                                                                                                }
+                                                                                                    ?>
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="Author" class="form-label">Author</label>
-                        <input type="text" name="Author" class="form-control" id="Author" aria-describedby="Author" required>
+                        <select class="form-select" name="Author" aria-label="Select Author" required>
+                            <?php
+                            $authorFetchQuery = 'select * from authors';
+                            $authorFetch = mysqli_query($connection, $authorFetchQuery);
+
+                            while ($row = mysqli_fetch_assoc($authorFetch)) {
+                            ?><option value="<?= $row['authorId'] ?>"><?= $row['authorName'] ?></option>><?php
+                                                                                                        }
+                                                                                                            ?>
+
+                        </select>
                     </div>
                     <div class="d-flex justify-content-center">
                         <button type="submit" name="submit" class="btn btn-secondary rounded">Add</button>

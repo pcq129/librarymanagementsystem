@@ -5,7 +5,7 @@ if (isset($_SESSION['id'])) {
     include "../connection.php";
 
     // $fetchBookListQuery = "select a.booksID, a.book_name, a.quantity, b.author_name from books as a inner join authors as b on b.authorID = a.authorID";
-    $fetchUserListQuery = "select a.id, a.name, a.email, a.mobileno, a.address from users as a where admin = 0";
+    $fetchUserListQuery = "select a.id, a.name, a.email, a.mobile, a.address from users as a where admin = 0";
     $fetchUserList = mysqli_query($connection, $fetchUserListQuery);
 
     if ($fetchUserList->{'num_rows'} > 0) { ?>
@@ -16,7 +16,7 @@ if (isset($_SESSION['id'])) {
                     <td>User Name</td>
                     <td>User Email</td>
                     <td>Mobile No</td>
-                    <td>Action</td>
+                    <td colspan="2">Action</td>
                 </tr>
             </thead>
             <tbody><?php
@@ -28,9 +28,12 @@ if (isset($_SESSION['id'])) {
 
                             <td><?= $row['name'] ?></td>
                             <td><?= $row['email'] ?></td>
-                            <td><?= $row['mobileno'] ?></td>
+                            <td><?= $row['mobile'] ?></td>
                             <td>
                                 <input class="btn btn-danger border-0 mt-2 me-2" type="submit" value="Remove"></input>
+                            </td>
+                            <td>
+                                <input class="btn btn-danger border-0 mt-2 me-2" type="submit" value="Edit"></input>
                             </td>
                         </form>
                     </tr>

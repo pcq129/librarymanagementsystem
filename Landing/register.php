@@ -1,4 +1,8 @@
 <?php
+// this file is for validating and adding data to users table on new registrations.
+// model for signup
+ 
+
 // include 'signup.php';
 // var_dump($_POST);
 // exit();

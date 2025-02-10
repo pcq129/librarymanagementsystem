@@ -26,12 +26,13 @@ if (isset($_SESSION['id'])) {
                         while ($row = mysqli_fetch_assoc($fetchBookList)) {
                         ?><tr>
                             <form action="approve.php" method="POST">
-                                <td><?= $row['book_id'] ?></td>
-                                <input type="hidden" name="bookID" id="bookID" value="<?= $row['book_id'] ?>">
-                                <td><?= $row['book_name'] ?></td>
+                                <td><?= $row['bookId'] ?></td>
+                                <input type="hidden" name="bookID" id="bookID" value="<?= $row['bookId'] ?>">
+                                <td><?= $row['bookName'] ?></td>
                                 <td><?= $row['quantity'] ?></td>
-                                <td><?= $row['author_name'] ?></td>
-                                <td><?= $row['studentID'] ?></td>
+                                <td><?= $row['authorName'] ?></td>
+                                <td><?= $row['studentId'] ?></td>
+                                <input type="hidden" name="studentID" id="studentID" value="<?= $row['studentId'] ?>">
                                 <td><?= $row['name'] ?></td>
                                 <td><?= $row['status'] ?></td>
                                 <td><input class="btn btn-danger border-0 mt-2 mb-2" type="submit" value="Approve"></input></td>

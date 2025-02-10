@@ -2,6 +2,7 @@
 session_start();
 $servername = 'localhost';
 $username = 'root';
+//model for verifying passwords on user login
 
 if (isset($_POST['login']) && $_POST['email'] && $_POST['password']) {
     $connection = mysqli_connect('localhost', 'root', '', 'librarymanagementsystem');
@@ -38,6 +39,10 @@ if (isset($_POST['login']) && $_POST['email'] && $_POST['password']) {
         //         }
         //     }
         // }
+
+
+
+        // functions and queries for authentication with single table for users and admin
 
         $query = "select * from users where email = '$email'";
         $query_run_user = mysqli_query($connection, $query);

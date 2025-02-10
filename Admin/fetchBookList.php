@@ -4,7 +4,7 @@
 if (isset($_SESSION['id'])) {
     include "../connection.php";
 
-    $fetchBookListQuery = "select a.booksID, a.book_name, a.quantity, b.author_name from books as a inner join authors as b on b.authorID = a.authorID order by a.book_name";
+    $fetchBookListQuery = "select a.booksId, a.bookName, a.quantity, b.authorName from books as a inner join authors as b on b.authorId = a.authorId order by a.bookName";
     $fetchBookList = mysqli_query($connection, $fetchBookListQuery);
 
     if ($fetchBookList->{'num_rows'} > 0) { ?>
@@ -23,11 +23,11 @@ if (isset($_SESSION['id'])) {
                         while ($row = mysqli_fetch_assoc($fetchBookList)) {
                         ?><tr>
                             <form action="removeBook.php" method="POST">
-                                <td><?= $row['booksID'] ?></td>
-                                <input type="hidden" name="bookID" id="bookID" value="<?= $row['booksID'] ?>">
-                                <td><?= $row['book_name'] ?></td>
+                                <td><?= $row['booksId'] ?></td>
+                                <input type="hidden" name="bookID" id="bookID" value="<?= $row['booksId'] ?>">
+                                <td><?= $row['bookName'] ?></td>
                                 <td><?= $row['quantity'] ?></td>
-                                <td><?= $row['author_name'] ?></td>
+                                <td><?= $row['authorName'] ?></td>
                                 <td><input class="btn btn-danger border-0 mt-2 mb-2" type="submit" value="Remove"></input></td>
                             </form>
                         </tr>

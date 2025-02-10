@@ -9,7 +9,7 @@ body {
   justify-content: center;
   align-items: center;
 }
-  
+
 .logo {
   height: 100px !important;
   width: 100px;
@@ -17,4 +17,8 @@ body {
 
 .searchbar {
   height: 40px !important;
+}
+
+.dateInput {
+  width: 120px;
 }

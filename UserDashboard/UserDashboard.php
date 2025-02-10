@@ -1,5 +1,5 @@
 <?php include '../header.php' ?>
-<div class="row h-75 d-flex align-content-center justify-content-center bg-body">
+<div class="row d-flex align-content-center justify-content-center bg-body">
     <div class="row mb-3 ms-auto me-auto">
         <div class="card">
 

@@ -1,8 +1,6 @@
 <?php
 include '../session_start.php';
 include '../connection.php';
-print_r($_POST);
-
 
 ?>
 
@@ -24,11 +22,11 @@ print_r($_POST);
 
         <nav class="navbar  w-100">
             <div class="container-fluid">
-                <a href="UserDashboard.php" class="navbar-brand">
+                <a href="AdminDashboard.php" class="navbar-brand">
                     Library Management System
                 </a>
                 <form class="nav-item w-50 d-flex align-items-center justify-content-center" method="post" action="search.php">
-                    <input type="text" name="search" class="rounded-2 w-75 m-2 p-2  border searchbar border-2 " placeholder="Enter book name to search" required>
+                    <input type="text" name="search" class="rounded-2 w-75 m-2 p-2  border searchbar border-2 " placeholder="Enter user name to search" required>
 
                     <button type="submit" class="ms-4 btn btn-danger rounded-pill">Search</button>
                 </form>
@@ -48,19 +46,15 @@ print_r($_POST);
             <!-- <div class="ms-4 col-2 float-start h-100">
 
                 <?php
-                echo "checking condition";
                 if (isset($_POST['search'])) {
-                    echo "checking condition";
-
                     $search = $_POST['search'];
-                    $query = "select books.bookName, books.booksId, authors.authorName, category.categoryName from books inner join authors on authors.authorId = books.authorId inner join category on category.categoryId = books.categoryId where books.bookName = '$_POST[search]'";
+                    $query = "select * from users where name = '$search'";
                     $data = mysqli_query($connection, $query);
-                    print_r($data);
 
 
                     if (isset($_POST['search']) && $data->{'num_rows'}) {
                 ?><h3>Filters</h3><?php
-                                    $filterQuery = "SELECT distinct c.categoryName from books as b inner join authors as a on a.authorId=b.authorId INNER join category as c on c.categoryId=b.categoryId where b.bookName='$_POST[search]'";
+                                    $filterQuery = "SELECT distinct c.catName from books as b inner join authors as a on a.authorId=b.authorId INNER join category as c on c.categoryId=b.categoryId where b.bookName='$_POST[search]'";
                                     $filters = mysqli_query($connection, $filterQuery);
 
 
@@ -69,7 +63,7 @@ print_r($_POST);
 
                                         echo  '<div class="form-check"><input class="form-check-input" type="checkbox" name="filters[]" id="flexCheckDefault">
                             <label class="form-check-label" for="flexCheckDefault">' .
-                                            $row['categoryName'] .
+                                            $row['catName'] .
                                             '</label></div>';
                                     }
                                     echo '<div class="d-flex"><input type="submit" class="button rounded-pill bg-danger ms-4 h-25 w-25 border-0"></div></form>';
@@ -89,10 +83,13 @@ print_r($_POST);
                         
                         <thead>
                         <tr>
-                            <th>Book Name</th>
-                            <th>Author</th>
-                            <th>Book Category</th>
-                            <th></th>
+                            <th>User ID</th>
+                            <th>User Name</th>
+                            <th>Email</th>
+                            <th>Mobile</th>
+                            <th>Books</th>
+                            <th>Return Date</th>
+                            <th>Action</th>
 
                         </tr>
                         </thead>
@@ -101,13 +98,32 @@ print_r($_POST);
                 ?>
                         <tr>
                             <form action="issue.php" method="POST">
-                                <td><?= $row['bookName'] ?></td>
-                                <td><?= $row['authorName'] ?></td>
-                                <td><?= $row['categoryName'] ?></td>
-                                <input type="hidden" id="bookID" name="booksID" value="<?= $row['booksId'] ?>">
+                                <td><?= $row['id'] ?></td>
+                                <td><?= $row['name'] ?></td>
+                                <td><?= $row['email'] ?></td>
+                                <td><?= $row['mobile'] ?></td>
+                                <input type="hidden" id="studentID" name="studentID" value="<?= $row['id'] ?>">
+                                <td>
+                                    <div class="me-3"><select class="form-select" name="booksID" aria-label="Select Book" required>
+                                            <?php
+                                            $bookFetchQuery = 'select bookName, booksId  from books';
+                                            $bookFetch = mysqli_query($connection, $bookFetchQuery);
+
+                                            while ($row = mysqli_fetch_assoc($bookFetch)) {
+                                            ?><option value="<?= $row['booksId'] ?>"><?= $row['bookName'] ?></option>><?php
+                                                                                                                    }
+                                                                                                                        ?>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td class="dateInput">
+                                    <div>
+                                        <input type="date" name="returnDate" value="<?= date('Y-m-d', strtotime(date('Y-m-d') . '+15 days')) ?>">
+                                    </div>
+                                </td>
 
                                 <td>
-                                    <input type='submit' class="btn btn-danger rounded-pill border-0 my-2 mb-2" value="issue">
+                                    <input type='submit' class="btn btn-danger rounded-pill border-0 mt-2 mb-2" value="issue">
                                 </td>
                             </form>
                         </tr>
@@ -126,35 +142,6 @@ print_r($_POST);
         ?>
 
         </div>
-        <!-- <?php
-                $DataRaw = mysqli_fetch_all($data);
-                if ($data->num_rows > 0) { ?>
-            <h3>Results found for </h3>
-            <table class="data-table w-100">
-                <thead>
-                    <tr>
-                        <th>Book Name</th>
-                        <th>Author</th>
-                        <th>Book Category</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    foreach ($DataRaw as $row) {
-                    ?><tr>
-                            <td><?php echo $row[0]; ?></td>
-                            <td><?php echo $row[1]; ?></td>
-                            <td><?php echo $row[2]; ?></td>
-
-                        </tr>
-                    <?php  } ?>
-                </tbody>
-            </table>
-        <?php
-                } else { ?>
-            <p>No data Found</p>
-        <?php
-                } ?> -->
     </div>
     </div>
 </body>

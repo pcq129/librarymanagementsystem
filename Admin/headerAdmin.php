@@ -1,5 +1,7 @@
 <?php
 include '../session_start.php';
+
+//common header file for all webpages related to admin
 ?>
 
 <!DOCTYPE html>
@@ -33,9 +35,9 @@ include '../session_start.php';
                 <?php
                 include '../connection.php';
                 $username = "select name from users where email ='$email'";
-                var_dump($username);
+                // var_dump($username);
                 $usernameRaw = mysqli_fetch_assoc(mysqli_query($connection, $username));
-                var_dump($usernameRaw);
+                // var_dump($usernameRaw);
 
                 echo "<div class='nav-item fw-bold ms-auto'>$usernameRaw[name]</div>";
                 ?>

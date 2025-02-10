@@ -5,7 +5,7 @@ include '../connection.php';
 
 if (isset($_SESSION['id'])) {
     $id = $_SESSION['id'];
-    $issuedBooksQuery = "select a.book_id, a.book_name, a.status, a.issue_date, c.author_name from issued_book as a inner join books as b on b.booksID = a.book_id inner join authors as c on c.authorID = b.authorID where studentID = $id order by a.status";
+    $issuedBooksQuery = "select a.book_id, a.book_name, a.status, a.issue_date, a.return_date, c.author_name from issued_book as a inner join books as b on b.booksID = a.book_id inner join authors as c on c.authorID = b.authorID where studentID = $id order by a.status";
     $issuedBooks = mysqli_query($connection, $issuedBooksQuery);
     // var_dump($issuedBooks->{'num_rows'});
     if ($issuedBooks->{'num_rows'} > 0) { ?>
@@ -16,8 +16,9 @@ if (isset($_SESSION['id'])) {
                     <td>Book ID</td>
                     <td>Book Name</td>
                     <td>Status</td>
-                    <td>Issue Date</td>
                     <td>Author</td>
+                    <td>Issue Date</td>
+                    <td>Return Date</td>
                 </tr>
             </thead>
             <tbody>
@@ -26,11 +27,12 @@ if (isset($_SESSION['id'])) {
                 while ($row = mysqli_fetch_assoc($issuedBooks)) {
                 ?>
                     <tr>
-                        <td><?= $row['book_id'] ?></td>
-                        <td><?= $row['book_name'] ?></td>
+                        <td><?= $row['bookId'] ?></td>
+                        <td><?= $row['bookName'] ?></td>
                         <td><?= $row['status'] ?></td>
-                        <td><?= $row['issue_date'] ?></td>
-                        <td><?= $row['author_name'] ?></td>
+                        <td><?= $row['authorName'] ?></td>
+                        <td><?= $row['issueDate'] ?></td>
+                        <td><?= $row['returnDate'] ?></td>
                     </tr>
                 <?php
                 }

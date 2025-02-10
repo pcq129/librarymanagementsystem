@@ -1,5 +1,7 @@
 <?php
 include 'headerAuth.php';
+
+//view for signup
 ?>
 
 
@@ -46,25 +48,25 @@ include 'headerAuth.php';
                 validateForm();
             });
 
-            function validateForm() {
-                const password = document.getElementById('password').value;
-                const confirmPassword = document.getElementById('confirmPassword').value;
-                const errorElement = document.getElementById('noMatch');
-                const submitCredentials = document.getElementById('submitCredentials')
-                let isValid = true;
+            // function validateForm() {
+            //     const password = document.getElementById('password').value;
+            //     const confirmPassword = document.getElementById('confirmPassword').value;
+            //     const errorElement = document.getElementById('noMatch');
+            //     const submitCredentials = document.getElementById('submitCredentials')
+            //     let isValid = true;
 
 
-                if (password !== confirmPassword) {
-                    errorElement.innerHTML = 'confirmation password not matching';
-                    errorElement.classList.add('text-danger');
-                    submitCredentials.classList.add('disabled');
-                    isValid = false;
-                } else {
+            //     if (password !== confirmPassword) {
+            //         errorElement.innerHTML = 'confirmation password not matching';
+            //         errorElement.classList.add('text-danger');
+            //         submitCredentials.classList.add('disabled');
+            //         isValid = false;
+            //     } else {
 
-                    errorElement.innerHTML = '';
-                    submitCredentials.classList.remove('disabled');
-                }
-            }
+            //         errorElement.innerHTML = '';
+            //         submitCredentials.classList.remove('disabled');
+            //     }
+            // }
         </script>
 
     </div>

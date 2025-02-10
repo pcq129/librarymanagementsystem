@@ -1,9 +1,6 @@
-<?php
-include '../session_start.php';
-?>
-
 <!DOCTYPE html>
 <html lang="en">
+    <!-- a common header file for all webpages in login process -->
 
 <head>
     <meta charset="UTF-8">
