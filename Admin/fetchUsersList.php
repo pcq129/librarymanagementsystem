@@ -22,7 +22,7 @@ if (isset($_SESSION['id'])) {
             <tbody><?php
                     while ($row = mysqli_fetch_assoc($fetchUserList)) {
                     ?><tr>
-                        <form action="removeUser.php" method="POST">
+                        <form action="removeUser.php" method="POST" onsubmit="return confirm('Are you sure you want to remove this user?');">
                             <td><?= $row['id'] ?></td>
                             <input type="hidden" name="userID" id="userID" value="<?= $row['id'] ?>">
 

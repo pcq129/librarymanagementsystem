@@ -9,10 +9,10 @@ include 'headerAdmin.php';
         <div class="col-2  d-flex align-items-start justify-content-start">
             <div>
                 <div class="d-flex justify-content-start mb-3">
-                    <h4 class="fw-bolder text-info-emphasis"Category</h4>
+                    <h4 class="fw-bolder text-info-emphasis" Category</h4>
                 </div>
                 <form action='addCategory.php' method="POST">
-                    <div class="mb-3">
+                    <div class=" mb-3">
                         <label for="Name" class="form-label">Category Name</label>
                         <input type="text" name="categoryName" class="form-control" id="Name" aria-describedby="Name" required>
                     </div>

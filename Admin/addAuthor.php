@@ -5,7 +5,7 @@ include "../connection.php";
 //model file for adding new author into author table
 
 
-if (isset($_POST['authorName']) && isset($_SESSION['email'])) {
+if (isset($_POST['authorName']) && isset($_SESSION['id'])) {
     $newAuthor = $_POST['authorName'];
     $CheckAuthorQuery = 'select * from authors where authorName = "' . $newAuthor . '"';
     $CheckAuthor = mysqli_query($connection, $CheckAuthorQuery);

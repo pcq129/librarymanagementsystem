@@ -40,7 +40,7 @@ if (isset($_SESSION['id'])) {
             }
         } else { ?>
             <center>
-                <h1>User have already issued one book</h1>
+                <h1>User have already requested one book</h1>
                 <a href="search.php">return to search page</a>
                 <br>
                 <a href="UserDashboard.php">return to Dashboard</a>

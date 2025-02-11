@@ -3,7 +3,7 @@
 include "../session_start.php";
 include "../connection.php";
 
-if (isset($_SESSION['email']) && isset($_POST['bookID']) && isset($_POST['studentID'])) {
+if (isset($_SESSION['id']) && isset($_POST['bookID']) && isset($_POST['studentID'])) {
     //implementation
     $booksID = $_POST['bookID'];
     $studentID = $_POST['studentID'];

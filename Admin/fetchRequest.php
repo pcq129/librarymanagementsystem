@@ -37,6 +37,11 @@ if (isset($_SESSION['id'])) {
                                 <input type="hidden" name="studentID" id="studentID" value="<?= $row['studentId'] ?>">
                                 <td><?= $row['name'] ?></td>
                                 <td><?= $row['status'] ?></td>
+                                <td class="dateInput">
+                                    <div>
+                                        <input type="date" name="returnDate" value="<?= date('Y-m-d', strtotime(date('Y-m-d') . '+15 days')) ?>">
+                                    </div>
+                                </td>
                                 <td><input class="btn btn-danger border-0 mt-2 mb-2" type="submit" value="Approve"></input></td>
                             </form>
                         </tr>

@@ -5,7 +5,7 @@ include '../connection.php';
 
 if (isset($_SESSION['id'])) {
     $id = $_SESSION['id'];
-    $issuedBooksQuery = "select a.bookId, a.bookName, a.status, a.requestDate, a.issueDate, a.returnDate, c.authorName from issuedbook as a inner join books as b on b.bookId = a.bookId inner join authors as c on c.authorId = b.authorId where studentId = $id order by a.status desc";
+    $issuedBooksQuery = "select DATE_FORMAT(a.issueDate, '%d-%m-%Y'), a.bookId, a.bookName, a.status, a.issueDate, a.requestDate, a.returnDate, c.authorName from issuedbook as a inner join books as b on b.bookId = a.bookId inner join authors as c on c.authorId = b.authorId where studentId = $id order by a.status desc";
     $issuedBooks = mysqli_query($connection, $issuedBooksQuery);
     // var_dump($issuedBooks->{'num_rows'});
     if ($issuedBooks->{'num_rows'} > 0) { ?>
@@ -17,7 +17,7 @@ if (isset($_SESSION['id'])) {
                     <td>Book Name</td>
                     <td>Status</td>
                     <td>Author</td>
-                    <td>Requeset Date</td>
+                    <td>Request Date</td>
                     <td>Issue Date</td>
                     <td>Return Date</td>
                 </tr>

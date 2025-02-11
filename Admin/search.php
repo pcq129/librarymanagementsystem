@@ -50,7 +50,7 @@ include '../connection.php';
             <?php
             if (isset($_POST['search'])) {
                 $search = $_POST['search'];
-                $query = "select * from users where name = '$search' && isAdmin = 0";
+                $query = "select * from users where name like '%$search%' && isAdmin = 0";
                 $data = mysqli_query($connection, $query);
 
 
@@ -87,7 +87,7 @@ include '../connection.php';
                     while ($row = mysqli_fetch_assoc($data)) {
             ?>
                     <tr>
-                        <form action="issue.php" method="POST">
+                        <form action="issueBookByAdmin.php" method="POST" onsubmit="return confirm('Are you sure you want to issue this book?');">
                             <td><?= $row['id'] ?></td>
                             <td><?= $row['name'] ?></td>
                             <td><?= $row['email'] ?></td>

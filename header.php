@@ -1,5 +1,8 @@
 <?php
 include 'session_start.php';
+if (!$_SESSION['id']) {
+    header('location:/Landing/landingPage.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +37,7 @@ include 'session_start.php';
 
                 <?php
                 include 'connection.php';
-                $username = "select name from users where email ='$email' && isAdmin = '0'";
+                $username = "select name from users where id ='$id' && isAdmin = '0'";
                 $usernameRaw = mysqli_fetch_assoc(mysqli_query($connection, $username));
                 if ($usernameRaw) {
                     echo "<div class='nav-item fw-bold ms-auto'>$usernameRaw[name]</div>";

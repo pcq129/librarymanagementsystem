@@ -1,8 +1,7 @@
 <?php
 include '../session_start.php';
 include '../connection.php';
-$name = $_SESSION['name'];
-$email = $_SESSION['email'];
+$id = $_SESSION['id'];
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
@@ -17,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
         if (isset($_POST['password']) && isset($_POST['currentPassword']) && isset($_POST['confirmPassword'])) {
 
             //implement currentpassword verification.
-            $fetchCurrentPassQuery = "select * from users where email = '$email' and password = '$currentPassword'";
+            $fetchCurrentPassQuery = "select * from users where id = '$id' and password = '$currentPassword'";
             $fetchCurrentPass = mysqli_query($connection, $fetchCurrentPassQuery);
             $fetchCurrentPassRow = mysqli_fetch_assoc($fetchCurrentPass);
 
@@ -27,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 
                 // echo "<br>";
                 // $userDataRaw = mysqli_fetch_assoc($userData);
-                mysqli_query($connection, "update `users` set password = '$passwordinput' where email='$email'");
+                mysqli_query($connection, "update `users` set password = '$passwordinput' where id='$id'");
                 echo 'password updated successfully <a href="UserDashboard.php">return to dashboard</a>';
             } else {
                 echo "current password doesn't match <a href='UserDashboard.php'>return to dashboard</a>";

@@ -11,10 +11,10 @@ include "headerAdmin.php";
             <div class="d-flex justify-content-center mb-2">
                 <h5>Please enter user's library credentials</h5>
             </div>
-            <form id="updatePass" action='updatePasswordModel.php' method="POST">
-                <div class="mb-3">
-                    <label for="password" class="form-label">New Password</label>
-                    <input type="password" id="password" name="password" class="form-control" id="password" required>
+            <form id="updatePass" action='updatePasswordModel.php' method="POST"">
+                <div class=" mb-3">
+                        <label for="password" class="form-label">New Password</label>
+                        <input type="password" id="password" name="password" class="form-control" id="password" required>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Confirm Password</label>
@@ -26,39 +26,39 @@ include "headerAdmin.php";
                     <button type="submit" name="submit" id="submitCredentials" class="btn btn-secondary rounded">Update</button>
                 </div>
             </form>
-            <script>
-                document.getElementById('updatePass').addEventListener('input', function() {
-                    validateForm();
-                });
+        <script>
+            document.getElementById('updatePass').addEventListener('input', function() {
+                validateForm();
+            });
 
-                function validateForm() {
-                    const password = document.getElementById('password').value;
-                    const confirmPassword = document.getElementById('confirmPassword').value;
-                    const errorElement = document.getElementById('noMatch');
-                    const submitCredentials = document.getElementById('submitCredentials')
-                    let isValid = true;
+            function validateForm() {
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                const errorElement = document.getElementById('noMatch');
+                const submitCredentials = document.getElementById('submitCredentials')
+                let isValid = true;
 
 
-                    if (password !== confirmPassword) {
-                        errorElement.innerHTML = 'confirmation password not matching';
-                        errorElement.classList.add('text-danger');
-                        submitCredentials.classList.add('disabled');
-                        isValid = false;
-                    } else {
+                if (password !== confirmPassword) {
+                    errorElement.innerHTML = 'confirmation password not matching';
+                    errorElement.classList.add('text-danger');
+                    submitCredentials.classList.add('disabled');
+                    isValid = false;
+                } else {
 
-                        errorElement.innerHTML = '';
-                        submitCredentials.classList.remove('disabled');
-                    }
+                    errorElement.innerHTML = '';
+                    submitCredentials.classList.remove('disabled');
                 }
-            </script>
+            }
+        </script>
 
 
 
-            <?php
-            // var_dump($_SERVER);
-            ?>
-        </div>
+        <?php
+        // var_dump($_SERVER);
+        ?>
     </div>
+</div>
 </div>
 </div>
 </body>

@@ -26,7 +26,7 @@ if (isset($_SESSION['id'])) {
                         <?php
                         while ($row = mysqli_fetch_assoc($fetchBookList)) {
                         ?><tr>
-                                <form action="updateReturnDate.php" method="POST">
+                                <form action="updateReturnDate.php" method="POST" onsubmit="return confirm('Are you sure you want to change issue date?');">
                                     <td><?= $row['bookId'] ?></td>
                                     <input type="hidden" name="bookID" id="bookID" value="<?= $row['bookId'] ?>">
                                     <td><?= $row['bookName'] ?></td>

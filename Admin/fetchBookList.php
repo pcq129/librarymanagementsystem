@@ -4,7 +4,7 @@
 if (isset($_SESSION['id'])) {
     include "../connection.php";
 
-    $fetchBookListQuery = "select a.bookId, a.bookName, a.quantity, b.authorName, a.bookPrice , c.categoryName from books as a inner join authors as b on b.authorId = a.authorId inner join category as c on a.categoryId = c.categoryId where isDeleted = 0 order by bookId desc";
+    $fetchBookListQuery = "select a.bookId, a.bookName, a.quantity, b.authorName, a.bookPrice , c.categoryName from books as a inner join authors as b on b.authorId = a.authorId inner join category as c on a.categoryId = c.categoryId where a.isDeleted = 0 order by bookId desc";
     $fetchBookList = mysqli_query($connection, $fetchBookListQuery);
 
     if ($fetchBookList->{'num_rows'} > 0) { ?>
@@ -26,7 +26,7 @@ if (isset($_SESSION['id'])) {
                 <tbody><?php
                         while ($row = mysqli_fetch_assoc($fetchBookList)) {
                         ?><tr>
-                            <form action="removeBook.php" method="POST">
+                            <form action="removeBook.php" method="POST" onsubmit="return confirm('Are you sure you want to remove this book from library');">
                                 <td><?= $row['bookId'] ?></td>
                                 <input type="hidden" name="bookID" id="bookID" value="<?= $row['bookId'] ?>">
                                 <td><?= $row['bookName'] ?></td>

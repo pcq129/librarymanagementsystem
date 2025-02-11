@@ -3,7 +3,7 @@ include "../session_start.php";
 include "../connection.php";
 
 
-if (isset($_POST['categoryName']) && isset($_SESSION['email'])) {
+if (isset($_POST['categoryName']) && isset($_SESSION['id'])) {
     $newCategory = $_POST['categoryName'];
 
     $CheckCategoryQuery = 'select * from category where categoryName = "' . $newCategory . '"';

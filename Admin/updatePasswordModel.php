@@ -2,18 +2,18 @@
 include '../session_start.php';
 include '../connection.php';
 
-
+print_r($_POST);
 
 if ($connection) {
     $db = mysqli_select_db($connection, $dbname);
 
 
     $passwordInput =  md5($_POST['password']);
-    $confirmPassword = $_POST['confirmPassword'];
+    $confirmPassword = md5($_POST['confirmPassword']);
     $id = $_POST['userID'];
     if ($passwordInput == $confirmPassword) {
-        $fetchUserDataQuery = "update table users set password = $passwordInput where id = $id ";
-        mysqli_query($connection, $fetchUserDataQuery);
+        $updatePasswordQuery = "update users set password = '$passwordInput' where id = $id ";
+        mysqli_query($connection, $updatePasswordQuery);
         echo "<h1>user password successfully.</h1>";
         echo '<a href="AdminDashboard.php" class="btn btn-rounded">Return to dashboard</a>';
     } else {

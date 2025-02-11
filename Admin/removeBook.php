@@ -2,7 +2,7 @@
 include "../session_start.php";
 include "../connection.php";
 
-if (isset($_SESSION['email']) && isset($_POST['bookID'])) {
+if (isset($_SESSION['id']) && isset($_POST['bookID'])) {
     //implementation
     $booksID = $_POST['bookID'];
     $removeBookQuery = "update books set isDeleted = 1 where bookId = $booksID ";

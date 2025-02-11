@@ -20,13 +20,20 @@ if (isset($_SESSION['id'])) {
                 <tbody><?php
                         while ($row = mysqli_fetch_assoc($fetchAuthorList)) {
                         ?><tr>
-                            <form action="removeAuthor.php" method="POST">
+                            <form action="removeAuthor.php" method="POST" onsubmit="return comfirm('delete author?');">
                                 <td><?= $row['authorId'] ?></td>
                                 <input type="hidden" name="authorID" id="authorID" value="<?= $row['authorId'] ?>">
                                 <td><?= $row['authorName'] ?></td>
                                 <!-- <td><input class="btn btn-danger border-0 mt-2 mb-2" type="submit" value="Edit"></input></td> -->
                                 <td><input class="btn btn-danger border-0 mt-2 mb-2" type="submit" value="Remove"></input></td>
                             </form>
+                            <td>
+                                <form action="updateAuthor.php" method="POST">
+                                    <input type="hidden" name="authorId" id="authorId" value="<?= $row['authorId'] ?>">
+                                    <input type="text" name="authorName" id="authorName" value="<?= $row['authorName'] ?>">
+                                    <input class="btn btn-danger border-0 mt-2 mb-2" type="submit" value="Update"></input>
+                                </form>
+                            </td>
                         </tr>
                     <?php
                         }

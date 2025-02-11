@@ -41,32 +41,7 @@ if (isset($_POST['login']) && $_POST['email'] && $_POST['password'] && validEmai
         // echo "connected";
         $db = mysqli_select_db($connection, 'librarymanagementsystem');
 
-        //checkfor credentials as admin (older implementation with separate admin table)
-        // $queryAdmin = "select * from admin where email = '$email'";
-        // $query_run = mysqli_query($connection, $queryAdmin);
-        // // echo "checking admin permission";
-        // if ($query_run->{'num_rows'} > 0) {
-        //     while ($row = mysqli_fetch_assoc($query_run)) {
-        //         // echo "checking admin permission2";
 
-        //         if ($row['email'] = $email) {
-        //             // echo "checking admin permission3";
-
-        //             if ($row['password'] = $password) {
-        //                 // echo "checking admin permission4";
-
-        //                 $_SESSION['name'] = $row['name'];
-        //                 $_SESSION['email'] = $row['email'];
-        //                 $_SESSION['id'] = $row['id'];
-        //                 header("Location:../Admin/AdminDashboard.php");
-        //             } else {
-        //                 echo "<br><br><center><span>Error (invalid credentials) </span></center>";
-        //             }
-        //         } else {
-        //             echo "email not found";
-        //         }
-        //     }
-        // }
 
 
 
@@ -91,10 +66,6 @@ if (isset($_POST['login']) && $_POST['email'] && $_POST['password'] && validEmai
                     if ($row['password'] == $password) {
                         // echo "checking user permisision4";
 
-
-
-                        $_SESSION['name'] = $row['name'];
-                        $_SESSION['email'] = $row['email'];
                         $_SESSION['id'] = $row['id'];
                         if ($row['isAdmin'] == 1) {
                             header("Location:../Admin/AdminDashboard.php");

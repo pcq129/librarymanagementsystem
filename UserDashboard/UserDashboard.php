@@ -1,4 +1,6 @@
-<?php include '../header.php' ?>
+<?php include '../header.php' ;
+print_r($_SESSION);
+?>
 <div class="row d-flex align-content-center justify-content-center bg-body">
     <div class="row mb-3 ms-auto me-auto">
         <div class="card">

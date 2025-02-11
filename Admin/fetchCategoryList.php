@@ -20,13 +20,20 @@ if (isset($_SESSION['id'])) {
                 <tbody><?php
                         while ($row = mysqli_fetch_assoc($fetchCategoryList)) {
                         ?><tr>
-                            <form action="removeCategory.php" method="POST">
+                            <form action="removeCategory.php" method="POST" onsubmit="return confirm('Are you sure you want delete category');">
                                 <td><?= $row['categoryId'] ?></td>
-                                <input type="hidden" name="catID" id="catID" value="<?= $row['categoryId'] ?>">
+                                <input type="hidden" name="catID" id="catID" value="<?= $row['categoryId'] ?>" onsubmit="return confirm('Are you sure you want to delete category?');">
                                 <td><?= $row['categoryName'] ?></td>
                                 <!-- <td><input class="btn btn-danger border-0 mt-2 mb-2" type="submit" value="Edit"></input></td> -->
                                 <td><input class="btn btn-danger border-0 mt-2 mb-2" type="submit" value="Remove"></input></td>
                             </form>
+                            <td>
+                                <form action="updateCategory.php" method="POST">
+                                    <input type="hidden" name="catID" id="catID" value="<?= $row['categoryId'] ?>">
+                                    <input type="text" name="categoryName" id="categoryName" value="<?= $row['categoryName'] ?>">
+                                    <input class="btn btn-danger border-0 mt-2 mb-2" type="submit" value="Update"></input>
+                                </form>
+                            </td>
                         </tr>
                     <?php
                         }

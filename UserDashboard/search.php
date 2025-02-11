@@ -41,7 +41,7 @@ include '../connection.php';
                     header('location:logout.php');
                 }
                 ?>
-                <a class=" btn btn-danger rounded border-0  m-4 nav-item" href="../logout.php">Logout</a>
+                <a class=" btn btn-danger rounded border-0  m-4 nav-item" href="logout.php">Logout</a>
             </div>
         </nav>
 
@@ -52,7 +52,7 @@ include '../connection.php';
                 if (isset($_POST['search'])) {
 
                     $search = $_POST['search'];
-                    $query = "select books.bookName, books.bookId, authors.authorName, category.categoryName from books inner join authors on authors.authorId = books.authorId inner join category on category.categoryId = books.categoryId where books.bookName = '$_POST[search]'";
+                    $query = "select books.bookName, books.bookId, authors.authorName, category.categoryName from books inner join authors on authors.authorId = books.authorId inner join category on category.categoryId = books.categoryId where books.bookName like '%$_POST[search]%'";
                     $data = mysqli_query($connection, $query);
 
 

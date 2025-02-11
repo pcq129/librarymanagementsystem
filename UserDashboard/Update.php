@@ -1,17 +1,10 @@
 <?php
 session_start();
-$name = $_SESSION['name'];
-$id = $_SESSION['email'];
+$id  = $_SESSION['id'];
+include '../connection.php';
 include '../commonFunction.php';
 
-
-$servername = 'localhost';
-$username = 'root';
-$password = 'test';
-$dbname = 'librarymanagementsystem';
-
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit']) && validEmail($id)) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 
 
     $connection = mysqli_connect($servername, $username, "", $dbname);
@@ -31,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit']) && validEmai
 
     if (isset($_POST['name']) && isset($_POST['MobileNo']) && isset($_POST['address'])) {
 
-        $sqlUpdate = "update `users` set name='$name' , mobile='$MobileNo', address = '$address' where email = '$id'";
+        $sqlUpdate = "update `users` set name='$name' , mobile='$MobileNo', address = '$address' where id = '$id'";
         $query_run = mysqli_query($connection, $sqlUpdate);
         echo "<h4>Data updated successfully</h4>";
         echo '<br><a href="UserDashboard.php">Return to dashboard</a>';

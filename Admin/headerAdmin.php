@@ -1,7 +1,10 @@
 <?php
 include '../session_start.php';
 include '../connection.php';
-$backPage = null;
+
+if (!isset($_SESSION['id'])) {
+    header('location:/Landing/landingPage.php');
+}
 
 //common header file for all webpages related to admin
 ?>
@@ -40,7 +43,7 @@ $backPage = null;
 
                 <?php
 
-                $username = "select name from users where email ='$email' && isAdmin = '1'";
+                $username = "select name from users where id ='$id' && isAdmin = '1'";
                 $usernameRaw = mysqli_fetch_assoc(mysqli_query($connection, $username));
                 if ($usernameRaw) {
                     echo "<div class='nav-item fw-bold ms-auto'>$usernameRaw[name]</div>";
