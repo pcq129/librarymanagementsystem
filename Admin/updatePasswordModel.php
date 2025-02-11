@@ -7,10 +7,13 @@ include '../connection.php';
 if ($connection) {
     $db = mysqli_select_db($connection, $dbname);
 
+
     $passwordInput =  md5($_POST['password']);
     $confirmPassword = $_POST['confirmPassword'];
+    $id = $_POST['userID'];
     if ($passwordInput == $confirmPassword) {
-        $fetchUserDataQuery = "update table users set password = $passwordInput";
+        $fetchUserDataQuery = "update table users set password = $passwordInput where id = $id ";
+        mysqli_query($connection, $fetchUserDataQuery);
         echo "<h1>user password successfully.</h1>";
         echo '<a href="AdminDashboard.php" class="btn btn-rounded">Return to dashboard</a>';
     } else {

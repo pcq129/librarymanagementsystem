@@ -4,7 +4,7 @@
 if (isset($_SESSION['id'])) {
     include "../connection.php";
 
-    $fetchAuthorListQuery = "select * from authors";
+    $fetchAuthorListQuery = "select * from authors where isDeleted = 0 order by authorId desc";
     $fetchAuthorList = mysqli_query($connection, $fetchAuthorListQuery);
 
     if ($fetchAuthorList->{'num_rows'} > 0) { ?>

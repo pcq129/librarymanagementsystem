@@ -5,7 +5,7 @@ if (isset($_SESSION['id'])) {
     include "../connection.php";
 
     // $fetchBookListQuery = "select a.bookId, a.book_name, a.quantity, b.author_name from books as a inner join authors as b on b.authorID = a.authorID";
-    $fetchUserListQuery = "select a.id, a.name, a.email, a.mobile, a.address from users as a where isAdmin = 0";
+    $fetchUserListQuery = "select a.id, a.name, a.email, a.mobile, a.address from users as a where isAdmin = 0 && isDeleted = 0 order by id desc";
     $fetchUserList = mysqli_query($connection, $fetchUserListQuery);
 
     if ($fetchUserList->{'num_rows'} > 0) { ?>

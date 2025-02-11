@@ -1,0 +1,10 @@
+PHP Project - Library Management System
+
+Library Management System has two modules: Admin and Student. 
+
+
+The Admin can manage categories, authors, and books by adding, updating, or deleting them. They can issue books to students, update return details, search for students using their ID, view student details, and change their password. 
+
+
+
+Students can register to receive a student ID, log in to access their dashboard, update their profile, view issued books with return dates, and change or recover their password.

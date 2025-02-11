@@ -13,39 +13,39 @@ INSERT INTO authors (authorID, author_name) VALUES
 
 -- Generating categories data
 INSERT INTO category (catID, cat_name) VALUES
-(2000, 'Fiction'),
-(2001, 'Non-Fiction'),
-(2002, 'Mystery'),
-(2003, 'Science Fiction'),
-(2004, 'Biography'),
-(2005, 'Fantasy'),
-(2006, 'History'),
-(2007, 'Romance'),
-(2008, 'Thriller'),
-(2009, 'Self-Help');
+('Fiction'),
+('Non-Fiction'),
+('Mystery'),
+('Science Fiction'),
+('Biography'),
+('Fantasy'),
+('History'),
+('Romance'),
+('Thriller'),
+('Self-Help');
 
 -- Generating books data with authorID (catID removed)
 INSERT INTO books (booksID, book_name, authorID) VALUES
-(3000, 'The Great Gatsby', 1000),
-(3001, '1984', 1001),
-(3002, 'To Kill a Mockingbird', 1002),
-(3003, 'Pride and Prejudice', 1003),
-(3004, 'Moby Dick', 1004),
-(3005, 'War and Peace', 1005),
-(3006, 'The Catcher in the Rye', 1006),
-(3007, 'Brave New World', 1007),
-(3008, 'The Hobbit', 1008),
-(3009, 'Crime and Punishment', 1009),
-(3010, 'Fahrenheit 451', 1001),
-(3011, 'The Lord of the Rings', 1002),
-(3012, 'Great Expectations', 1009),
-(3013, 'Dracula', 1004),
-(3014, 'Frankenstein', 1005),
-(3015, 'The Picture of Dorian Gray', 1006),
-(3016, 'Wuthering Heights', 1003),
-(3017, 'Alice’s Adventures in Wonderland', 1000),
-(3018, 'Les Misérables', 1009),
-(3019, 'Sherlock Holmes', 1006);
+(1000, 'The Great Gatsby', 1000),
+(1001, '1984', 1001),
+(1002, 'To Kill a Mockingbird', 1002),
+(1003, 'Pride and Prejudice', 1003),
+(1004, 'Moby Dick', 1004),
+(1005, 'War and Peace', 1005),
+(1006, 'The Catcher in the Rye', 1006),
+(1007, 'Brave New World', 1007),
+(1008, 'The Hobbit', 1008),
+(1009, 'Crime and Punishment', 1009),
+(1010, 'Fahrenheit 451', 1001),
+(1011, 'The Lord of the Rings', 1002),
+(1012, 'Great Expectations', 1009),
+(1013, 'Dracula', 1004),
+(1014, 'Frankenstein', 1005),
+(1015, 'The Picture of Dorian Gray', 1006),
+(1016, 'Wuthering Heights', 1003),
+(1017, 'Alice’s Adventures in Wonderland', 1000),
+(1018, 'Les Misérables', 1009),
+(1019, 'Sherlock Holmes', 1006);
 
 -- Generating book-category relationships
 INSERT INTO bookcategory (ID, bookID, catID) VALUES
@@ -61,7 +61,7 @@ INSERT INTO bookcategory (ID, bookID, catID) VALUES
 (4009, 3009, 2006);
 
 -- Generating users data
-INSERT INTO users (userID, name, email, password, mobile) VALUES
+INSERT INTO users (userId, name, email, password, mobile) VALUES
 (5000, 'Alice', 'mailto:alice@example.com', 'pass123', 9876543210),
 (5001, 'Bob', 'mailto:bob@example.com', 'secure456', 8765432109),
 (5002, 'Charlie', 'mailto:charlie@example.com', 'library789', 7654321098),
@@ -85,3 +85,36 @@ INSERT INTO issued_book (issueID, userID, bookID, issue_date, return_date) VALUE
 (6007, 5007, 3007, '2024-02-15', '2024-03-15'),
 (6008, 5008, 3008, '2024-02-20', '2024-03-20'),
 (6009, 5009, 3009, '2024-02-25', '2024-03-25');
+
+
+
+
+insert inot authors (authorName) VALUES ('David A. Patterson'),
+('John L. Hennessy'),
+('David Harris'),
+('Sarah Harris'),
+('David A. Patterson'),
+('John L. Hennessy'),
+('J. Noland White'),
+('Saundra K. Ciccarelli'),
+('Hugh D. Young'),
+('Roger A. Freedman'),
+('Randall D. Knight'),
+('George B. Thomas Jr'),
+('Joel R. Hass'),
+('Maurice D. Weir'),
+('John D. Cutnell'),
+('Kenneth W. Johnson'),
+('Philipp K. Janert'),
+('Mr. Martin Holzke'),
+('Mr. Tom Stachowitz'),
+('Bruce H. Edwards'),
+('Ron Larson'),
+('Daniel L. Schacter'),
+('Daniel T. Gilbert'),
+('David G. Myers'),
+('Julia Lobur'),
+('Linda Null'),
+('A. Michael Huberman'),
+('Matthew B. Miles'),
+('Clare Churcher');

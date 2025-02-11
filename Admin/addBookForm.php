@@ -1,4 +1,5 @@
 <?php
+$backPage = '../manageBooks.php';
 include 'headerAdmin.php';
 // view for adding book
 ?>

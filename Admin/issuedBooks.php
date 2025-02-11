@@ -4,7 +4,7 @@
 if (isset($_SESSION['id'])) {
     include "../connection.php";
 
-    $fetchBookListQuery = "select i.bookId, i.status, i.bookName, i.studentId, i.returnDate, u.name, i.issueDate, a.authorName from issuedBook as i inner join users as u on u.id = i.studentId inner join books as b on i.bookId = b.bookId inner join authors as a on b.authorId = a.authorId where i.status = 'issued'; ";
+    $fetchBookListQuery = "select i.bookId, i.status, i.bookName, i.studentId, i.returnDate, u.name, i.issueDate, a.authorName from issuedBook as i inner join users as u on u.id = i.studentId inner join books as b on i.bookId = b.bookId inner join authors as a on b.authorId = a.authorId where i.status = 'issued' order by issueDate desc; ";
     $fetchBookList = mysqli_query($connection, $fetchBookListQuery);
 
     if ($fetchBookList->{'num_rows'} > 0) { ?>
@@ -35,7 +35,7 @@ if (isset($_SESSION['id'])) {
                                     <input type="hidden" name="studentID" id="studentID" value="<?= $row['studentId'] ?>">
                                     <td><?= $row['name'] ?></td>
                                     <td><?= $row['issueDate'] ?></td>
-                                    <td><input type="date" name="returnDate" value="<?= $row['returnDate']?>" </input></td>
+                                    <td><input type="date" name="returnDate" value="<?= $row['returnDate'] ?>" </input></td>
                                     <td><input class="btn btn-danger border-0 mt-2 mb-2" type="submit" value="Update"></input></td>
                                 </form>
                             </tr>

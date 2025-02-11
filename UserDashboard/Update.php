@@ -2,6 +2,7 @@
 session_start();
 $name = $_SESSION['name'];
 $id = $_SESSION['email'];
+include '../commonFunction.php';
 
 
 $servername = 'localhost';
@@ -10,7 +11,7 @@ $password = 'test';
 $dbname = 'librarymanagementsystem';
 
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit']) && validEmail($id)) {
 
 
     $connection = mysqli_connect($servername, $username, "", $dbname);
@@ -37,4 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
     } else {
         echo "<div class='text-danger'>Error : Enter all the details</div>";
     }
+} else {
+    echo "invalid email id";
 }

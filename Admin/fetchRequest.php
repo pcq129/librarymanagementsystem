@@ -4,7 +4,7 @@
 if (isset($_SESSION['id'])) {
     include "../connection.php";
 
-    $fetchBookListQuery = "select i.bookId, i.status, i.bookName, i.studentId, u.name, b.quantity, a.authorName from issuedBook as i inner join users as u on u.id = i.studentId inner join books as b on i.bookId = b.bookId inner join authors as a on b.authorId = a.authorId where i.status = 'requested'; ";
+    $fetchBookListQuery = "select i.bookId, b.bookPrice, i.status, i.bookName, i.studentId, u.name, b.quantity, a.authorName from issuedBook as i inner join users as u on u.id = i.studentId inner join books as b on i.bookId = b.bookId inner join authors as a on b.authorId = a.authorId where i.status = 'requested'; ";
     $fetchBookList = mysqli_query($connection, $fetchBookListQuery);
 
     if ($fetchBookList->{'num_rows'} > 0) { ?>
@@ -13,10 +13,11 @@ if (isset($_SESSION['id'])) {
                 <thead>
                     <tr>
                         <td>Book ID</td>
-                        <td>Book Name</td>
-                        <td>Book Quantity</td>
-                        <td>Author Name</td>
                         <td>User ID</td>
+                        <td>Price</td>
+                        <td>Quantity</td>
+                        <td>Book Name</td>
+                        <td>Author Name</td>
                         <td>User Name</td>
                         <td>Status</td>
                         <td>Action</td>
@@ -27,11 +28,12 @@ if (isset($_SESSION['id'])) {
                         ?><tr>
                             <form action="issue.php" method="POST">
                                 <td><?= $row['bookId'] ?></td>
-                                <input type="hidden" name="bookID" id="bookID" value="<?= $row['bookId'] ?>">
-                                <td><?= $row['bookName'] ?></td>
-                                <td><?= $row['quantity'] ?></td>
-                                <td><?= $row['authorName'] ?></td>
                                 <td><?= $row['studentId'] ?></td>
+                                <input type="hidden" name="bookID" id="bookID" value="<?= $row['bookId'] ?>">
+                                <td><?= $row['bookPrice'] ?></td>
+                                <td><?= $row['quantity'] ?></td>
+                                <td><?= $row['bookName'] ?></td>
+                                <td><?= $row['authorName'] ?></td>
                                 <input type="hidden" name="studentID" id="studentID" value="<?= $row['studentId'] ?>">
                                 <td><?= $row['name'] ?></td>
                                 <td><?= $row['status'] ?></td>

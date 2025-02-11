@@ -15,15 +15,15 @@ if (isset($_SESSION['id'])) {
             $fetchBook = mysqli_query($connection, $fetchBookQuery);
             $fetchBookData = mysqli_fetch_assoc($fetchBook);
             $book_name = $fetchBookData['bookName'];
-            $date = date("d-m-Y");
-            $returnDate = date("d-m-Y", strtotime($date . '+ 15 days'));
+            $date = date("Y-m-d");
+            $returnDate = date("Y-m-d", strtotime($date . '+ 15 days'));
 
             $quantityQuery = "select quantity from books where bookId = $book_id";
             $quantity = mysqli_query($connection, $quantityQuery);
             $quantityNo = mysqli_fetch_assoc($quantity);
 
             if ($quantityNo['quantity'] > 0) {
-                $issueBookQuery = 'insert into issuedbook ( bookId, bookName, studentId, status, issueDate) values (' . $book_id . ',"' . $book_name . '",' . $student_id . ',"requested","' . $date . '")';
+                $issueBookQuery = 'insert into issuedbook ( bookId, bookName, studentId, status, requestDate) values (' . $book_id . ',"' . $book_name . '",' . $student_id . ',"requested",now() )';
                 $issuedBook = mysqli_query($connection, $issueBookQuery);
                 $newQuantity = $quantityNo['quantity'] - 1;
                 $updateQuantityQuery = "update books quantity = $newQuantity where bookId = $book_id";

@@ -28,6 +28,9 @@ $fetchBookDataRow = mysqli_fetch_assoc($fetchBookData);
                     <?php
                     $categoryFetchQuery = 'select * from category';
                     $categoryFetch = mysqli_query($connection, $categoryFetchQuery);
+                    ?>
+                    <option selected><?= $fetchBookDataRow['categoryName']; ?></option>
+                    <?php
 
                     while ($row = mysqli_fetch_assoc($categoryFetch)) {
                     ?><option value="<?= $row['categoryId'] ?>"><?= $row['categoryName'] ?></option>><?php
@@ -40,8 +43,9 @@ $fetchBookDataRow = mysqli_fetch_assoc($fetchBookData);
                 <select class="form-select" name="Author" aria-label="Select Author" required>
                     <?php
                     $authorFetchQuery = 'select * from authors';
-                    $authorFetch = mysqli_query($connection, $authorFetchQuery);
-
+                    $authorFetch = mysqli_query($connection, $authorFetchQuery); ?>
+                    <option selected><?= $fetchBookDataRow['authorName']; ?></option>
+                    <?php
                     while ($row = mysqli_fetch_assoc($authorFetch)) {
                     ?><option value="<?= $row['authorId'] ?>"><?= $row['authorName'] ?></option>><?php
                                                                                                 }

@@ -33,11 +33,15 @@ include '../connection.php';
                 </form>
 
                 <?php
-                $username = "select name from users where email ='$email'  ";
+                $username = "select name from users where email ='$email' && isAdmin = '0'";
                 $usernameRaw = mysqli_fetch_assoc(mysqli_query($connection, $username));
-                echo "<div class='nav-item fw-bold ms-auto'>$usernameRaw[name]</div>";
+                if ($usernameRaw) {
+                    echo "<div class='nav-item fw-bold ms-auto'>$usernameRaw[name]</div>";
+                } else {
+                    header('location:logout.php');
+                }
                 ?>
-                <a class=" btn btn-danger rounded border-0  m-4 nav-item" href="logout.php">Logout</a>
+                <a class=" btn btn-danger rounded border-0  m-4 nav-item" href="../logout.php">Logout</a>
             </div>
         </nav>
 

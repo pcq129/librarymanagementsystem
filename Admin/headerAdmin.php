@@ -1,5 +1,7 @@
 <?php
 include '../session_start.php';
+include '../connection.php';
+$backPage = null;
 
 //common header file for all webpages related to admin
 ?>
@@ -22,6 +24,10 @@ include '../session_start.php';
 
         <nav class="navbar  w-100">
             <div class="container-fluid">
+                <div class="">
+
+                    <a href="<?= $backPage ?>"><img class="h-50 w-25 p-1" src=" ../assets/back.svg"></a>
+                </div>
                 <a href="AdminDashboard.php" class="navbar-brand">
                     Library Management System
                 </a>
@@ -33,13 +39,15 @@ include '../session_start.php';
 
 
                 <?php
-                include '../connection.php';
-                $username = "select name from users where email ='$email'";
-                // var_dump($username);
-                $usernameRaw = mysqli_fetch_assoc(mysqli_query($connection, $username));
-                // var_dump($usernameRaw);
 
-                echo "<div class='nav-item fw-bold ms-auto'>$usernameRaw[name]</div>";
+                $username = "select name from users where email ='$email' && isAdmin = '1'";
+                $usernameRaw = mysqli_fetch_assoc(mysqli_query($connection, $username));
+                if ($usernameRaw) {
+                    echo "<div class='nav-item fw-bold ms-auto'>$usernameRaw[name]</div>";
+                } else {
+                    header('location:logout.php');
+                }
+
                 ?>
                 <a class=" btn btn-danger rounded border-0  m-4 nav-item" href="logout.php">Logout</a>
             </div>

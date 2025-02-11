@@ -4,7 +4,7 @@
 if (isset($_SESSION['id'])) {
     include "../connection.php";
 
-    $fetchCategoryListQuery = "select * from category";
+    $fetchCategoryListQuery = "select * from category where isDeleted = 0 order by categoryId desc";
     $fetchCategoryList = mysqli_query($connection, $fetchCategoryListQuery);
 
     if ($fetchCategoryList->{'num_rows'} > 0) { ?>
