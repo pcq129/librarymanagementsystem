@@ -2,9 +2,32 @@
 include 'headerAdmin.php';
 
 //view component to add authors by admin
+print_r($_SESSION['addAuthor']);
 ?>
 
 <div class="row">
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">Alert</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Author added successfully
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var isAdd = <?= $_SESSION['addAuthor']; ?>
+        const toastLiveExample = document.getElementById('liveToast')
+        if (isAdd) {
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
+            toastBootstrap.show();
+        }
+    </script>
+
 
     <div class="row h-100 d-flex align-content-center justify-content-start">
 

@@ -12,21 +12,25 @@ if (isset($_POST['authorName']) && isset($_SESSION['id']) && preg_match("/[a-zA-
     if ($CheckAuthor->{'num_rows'} == 0) {
         $addAuthorQuery = "insert into authors (authorName) values ('$newAuthor')";
         $addAuthor = mysqli_query($connection, $addAuthorQuery);
+        $_SESSION['addAuthor'] = 1;
+        print_r($_SESSION);
+        exit();
+        die();
 
-        echo "  <SCRIPT>
-        alert('author added successfully');
-                        window.location.replace('authorsForm.php');
-                    </SCRIPT>";
+        // echo "  <SCRIPT>
+        // alert('author added successfully');
+        //                 window.location.replace('authorsForm.php');
+        //             </SCRIPT>";
 ?>
         <!-- <h3>Author added successfully</h3>
         <a href="ManageBooks.php">return to Manage Books Page</a>
         <a href="adminDashboard.php">return to dashboard</a> -->
     <?php
     } else {
-        echo "  <SCRIPT>
-        alert('Author already exists');
-                        window.location.replace('authorsForm.php');
-                    </SCRIPT>";
+        // echo "  <SCRIPT>
+        // alert('Author already exists');
+        //                 window.location.replace('authorsForm.php');
+        //             </SCRIPT>";
     ?>
         <!-- <h2>Author already exists</h2>
         <a href="ManageBooks.php">return to Manage Books Page</a>
@@ -34,10 +38,10 @@ if (isset($_POST['authorName']) && isset($_SESSION['id']) && preg_match("/[a-zA-
     <?php
     }
 } else {
-    echo "  <SCRIPT>
-    alert('Invalid Inputs');
-    window.location.replace('authorsForm.php');
-</SCRIPT>";
+    //     echo "  <SCRIPT>
+    //     alert('Invalid Inputs');
+    //     window.location.replace('authorsForm.php');
+    // </SCRIPT>";
     ?>
     <!-- <h3></h3>
 
