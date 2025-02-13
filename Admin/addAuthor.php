@@ -5,30 +5,45 @@ include "../connection.php";
 //model file for adding new author into author table
 
 
-if (isset($_POST['authorName']) && isset($_SESSION['id'])) {
-    $newAuthor = $_POST['authorName'];
-    $CheckAuthorQuery = 'select * from authors where authorName = "' . $newAuthor . '"';
+$newAuthor = trim($_POST['authorName']);
+if (isset($_POST['authorName']) && isset($_SESSION['id']) && preg_match("/[a-zA-Z0-9]/", $newAuthor)) {
+    $CheckAuthorQuery = 'select * from authors where authorName = "' . $newAuthor . '" && isDeleted = 0';
     $CheckAuthor = mysqli_query($connection, $CheckAuthorQuery);
     if ($CheckAuthor->{'num_rows'} == 0) {
         $addAuthorQuery = "insert into authors (authorName) values ('$newAuthor')";
         $addAuthor = mysqli_query($connection, $addAuthorQuery);
 
+        echo "  <SCRIPT>
+        alert('author added successfully');
+                        window.location.replace('authorsForm.php');
+                    </SCRIPT>";
 ?>
-        <h3>Author added successfully</h3>
+        <!-- <h3>Author added successfully</h3>
         <a href="ManageBooks.php">return to Manage Books Page</a>
-        <a href="adminDashboard.php">return to dashboard</a>
+        <a href="adminDashboard.php">return to dashboard</a> -->
     <?php
     } else {
+        echo "  <SCRIPT>
+        alert('Author already exists');
+                        window.location.replace('authorsForm.php');
+                    </SCRIPT>";
     ?>
-        <h2>Author already exists</h2>
+        <!-- <h2>Author already exists</h2>
         <a href="ManageBooks.php">return to Manage Books Page</a>
-        <a href="adminDashboard.php">return to dashboard</a>
+        <a href="adminDashboard.php">return to dashboard</a> -->
     <?php
     }
 } else {
+    echo "  <SCRIPT>
+    alert('Invalid Inputs');
+    window.location.replace('authorsForm.php');
+</SCRIPT>";
     ?>
-    <h3>Error occured</h3>
+    <!-- <h3></h3>
+
+    <a href="ManageBooks.php">return to Manage Books Page</a>
     <a href="adminDashboard.php">return to dashboard</a>
+    <a href="authorsForm.php">return to authors</a> -->
 <?php
 
 }

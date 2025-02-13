@@ -1,12 +1,11 @@
-<?php include '../header.php' ;
-print_r($_SESSION);
+<?php include '../header.php';
 ?>
 <div class="row d-flex align-content-center justify-content-center bg-body">
     <div class="row mb-3 ms-auto me-auto">
         <div class="card">
 
             <div class="card-body">
-                <h5 class="card-title">Issue Books</h5>
+                <h5 class="card-title">Request Books</h5>
                 <p class="card-text">Search and issue books from the library</p>
                 <a href="search.php" class="btn btn-primary">Book-Store</a>
             </div>

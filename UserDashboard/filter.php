@@ -13,3 +13,4 @@
 
 
 <!-- filter feature will be implemented post basic feature implementations -->
+ <!-- filter feature is dropped from requirements -->

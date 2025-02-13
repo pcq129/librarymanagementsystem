@@ -5,11 +5,11 @@ include '../connection.php';
 
 if (isset($_SESSION['id'])) {
     $id = $_SESSION['id'];
-    $issuedBooksQuery = "select DATE_FORMAT(a.issueDate, '%d-%m-%Y'), a.bookId, a.bookName, a.status, a.issueDate, a.requestDate, a.returnDate, c.authorName from issuedbook as a inner join books as b on b.bookId = a.bookId inner join authors as c on c.authorId = b.authorId where studentId = $id && status = 'issued' || status = 'requested' order by a.status desc";
+    $issuedBooksQuery = "select DATE_FORMAT(a.issueDate, '%d-%m-%Y'), a.bookId, a.bookName, a.status, a.issueDate, a.requestDate, a.returnDate, c.authorName from issuedbook as a inner join books as b on b.bookId = a.bookId inner join authors as c on c.authorId = b.authorId where studentId = $id && status = 'returned' order by a.status desc";
     $issuedBooks = mysqli_query($connection, $issuedBooksQuery);
     // var_dump($issuedBooks->{'num_rows'});
     if ($issuedBooks->{'num_rows'} > 0) { ?>
-        <h2>Issued Books</h2>
+        <h2>Returned Books</h2>
         <table class="data-table table-striped table w-100">
             <thead>
                 <tr>
@@ -49,7 +49,7 @@ if (isset($_SESSION['id'])) {
         </table>
 <?php
     } else {
-        echo '<h3>No Books Issued</h3>';
+        echo '<h3>No Returned Books</h3>';
     }
 } else {
     echo 'please login';

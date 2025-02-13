@@ -1,8 +1,6 @@
 <?php
 include 'session_start.php';
-if (!$_SESSION['id']) {
-    header('location:/Landing/landingPage.php');
-}
+
 ?>
 
 <!DOCTYPE html>

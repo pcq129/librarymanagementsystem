@@ -14,7 +14,7 @@
 
 <body>
     <div class="container-fluid h-100">
-        <?php include '../../navbar.php' ?>
+        <?php include '../../headerAdmin.php' ?>
 
         <div class="row h-100 d-flex align-content-center justify-content-center">
 

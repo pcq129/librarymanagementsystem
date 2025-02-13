@@ -30,32 +30,45 @@ if (isset($_SESSION['id'])) {
             }
 
 
-            $quantityQuery = "select quantity from books where bookId = $book_id";
-            $quantity = mysqli_query($connection, $quantityQuery);
-            $quantityNo = mysqli_fetch_assoc($quantity);
 
-            if ($quantityNo['quantity'] > 0) {
+
+            if ($fetchBookData['quantity'] > 0) {
                 // $issueBookQuery = "update issuedBook set status = 'issued', issueDate = '$date', returnDate = '$returnDate' where bookId = $book_id && studentId = $student_id";
                 $issueBookQuery = 'insert into issuedBook ( bookId, bookName, studentId, status, issueDate, returnDate) values (' . $book_id . ',"' . $book_name . '",' . $student_id . ',"issued","' . $date . '","' . $returnDate . '")';
-                $issuedBook = mysqli_query($connection, $issueBookQuery);
-                $newQuantity = $quantityNo['quantity'] - 1;
-                $updateQuantityQuery = "update books quantity = $newQuantity where bookId = $book_id";
+                $issueBook = mysqli_query($connection, $issueBookQuery);
+                $updateQuantityQuery = "update books set quantity = quantity-1 , issueCount = issueCount-1 where bookId = $book_id";
+                $updateQuantity = mysqli_query($connection, $updateQuantityQuery);
 
+
+                echo "<SCRIPT>
+                alert('Book issued to student');
+        window.location.replace('search.php');
+    </SCRIPT>";
 ?>
-                <center>
+                <!-- <center>
                     <h1>Book Issued successfully.</h1>
                     <a href="AdminDashboard.php">return to Dashboard</a>
-                </center>
+                </center> -->
             <?php
             } else {
-                echo "no more copies of books available";
+                echo "<SCRIPT>
+                alert('No more copies of this book available');
+        window.location.replace('search.php');
+    </SCRIPT>"; 
+            ?>
+            <?php
+
             }
-        } else { ?>
-            <center>
+        } else {
+            echo "<SCRIPT>
+            alert('User have already issued this book');
+        window.location.replace('search.php');
+    </SCRIPT>"; ?>
+            <!-- <center>
                 <h1>User have already issued this book</h1>
                 <br>
                 <a href="AdminDashboard.php">return to Dashboard</a>
-            </center>
+            </center> -->
 <?php
 
         }

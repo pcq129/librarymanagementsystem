@@ -19,7 +19,7 @@ if (!isset($_SESSION['id'])) {
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/styles.css">
     <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/custom.js"></script>
+    <script defer src="../js/custom.js"></script>
 </head>
 
 <body>

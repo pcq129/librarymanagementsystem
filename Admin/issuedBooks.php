@@ -19,14 +19,14 @@ if (isset($_SESSION['id'])) {
                             <td>User Name</td>
                             <td>Issue Date</td>
                             <td>Return Date</td>
-                            <td colspan="2">Action</td>
+                            <td colspan="3">Actions</td>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         while ($row = mysqli_fetch_assoc($fetchBookList)) {
                         ?><tr>
-                                <form action="updateReturnDate.php" method="POST" onsubmit="return confirm('Are you sure you want to change issue date?');">
+                                <form action="updateReturnDate.php" method="POST">
                                     <td><?= $row['bookId'] ?></td>
                                     <input type="hidden" name="bookID" id="bookID" value="<?= $row['bookId'] ?>">
                                     <td><?= $row['bookName'] ?></td>
@@ -36,7 +36,14 @@ if (isset($_SESSION['id'])) {
                                     <td><?= $row['name'] ?></td>
                                     <td><?= $row['issueDate'] ?></td>
                                     <td><input type="date" name="returnDate" value="<?= $row['returnDate'] ?>" </input></td>
-                                    <td><input class="btn btn-danger border-0 mt-2 mb-2" type="submit" value="Update"></input></td>
+                                    <td><input class="btn btn-danger rounded-pill border-0 mt-2 mb-2" type="submit" value="Update"></input></td>
+                                </form>
+                                <form action="return.php" method="POST">
+                                    <td>
+                                        <input type="hidden" name="bookID" id="bookID" value="<?= $row['bookId'] ?>">
+                                        <input class="btn btn-danger rounded-pill border-0 mt-2 mb-2" type="submit" value="Return"></input>
+
+                                    </td>
                                 </form>
                             </tr>
                         <?php

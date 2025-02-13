@@ -33,7 +33,7 @@ include '../connection.php';
                 </form>
 
                 <?php
-                $username = "select name from users where email ='$email' && isAdmin = '0'";
+                $username = "select name from users where id ='$id' && isAdmin = '0'";
                 $usernameRaw = mysqli_fetch_assoc(mysqli_query($connection, $username));
                 if ($usernameRaw) {
                     echo "<div class='nav-item fw-bold ms-auto'>$usernameRaw[name]</div>";
@@ -51,8 +51,12 @@ include '../connection.php';
                 <?php
                 if (isset($_POST['search'])) {
 
-                    $search = $_POST['search'];
-                    $query = "select books.bookName, books.bookId, authors.authorName, category.categoryName from books inner join authors on authors.authorId = books.authorId inner join category on category.categoryId = books.categoryId where books.bookName like '%$_POST[search]%'";
+                    $search = trim($_POST['search']);
+                    if ((!preg_match("/[a-zA-Z0-9]/", $search))) {
+                        echo "invalid search";
+                        die();
+                    }
+                    $query = "select books.bookName, books.bookId, authors.authorName, category.categoryName from books inner join authors on authors.authorId = books.authorId inner join category on category.categoryId = books.categoryId where books.bookName like '%$_POST[search]%' || books.bookId like '%$_POST[search]%' && books.isDeleted = 0 && quantity>0";
                     $data = mysqli_query($connection, $query);
 
 
@@ -61,7 +65,7 @@ include '../connection.php';
                         $filters = mysqli_query($connection, $filterQuery);
 
                         echo '<h3>Results found for </h3>
-                    <table class="data-table w-100 ms-3">
+                    <table class=" ms-4 data-table w-100 ms-3">
                     
                     
                     <thead>

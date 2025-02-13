@@ -19,8 +19,10 @@ include 'headerAuth.php';
                 <input type="text" name="name" class="form-control" id="name" aria-describedby="Name" required>
             </div>
             <div class="mb-3">
-                <label for="MobileNo" class="form-label">MobileNo</label>
-                <input type="number" name="mobileno" class="form-control" id="exampleInputEmail1" aria-describedby="Mobile Number" required>
+                <label for="Mobile" class="form-label">Mobile</label>
+                <input type="tel" name="mobileNo" class="form-control" minlength="10"
+                    maxlength="10" id="mobileNo" size="10" aria-describedby="Mobile Number" required>
+
             </div>
             <div class="mb-3">
                 <label for="Address" class="form-label">Residential Address</label>

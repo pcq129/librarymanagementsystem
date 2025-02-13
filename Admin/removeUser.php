@@ -9,7 +9,10 @@ if (isset($_SESSION['id']) && isset($_POST['userID'])) {
     $removeUserQuery = "update users set isDeleted = 1 where id = $intUserID ";
     $removeUser = mysqli_query($connection, $removeUserQuery);
     // header('location: ManageUsers.php');
-    echo "<center><h1>User removed successfully.</h1><br><a href='AdminDashboard.php'>Return to dashboard</a></center>";
+    echo "<SCRIPT>
+    alert('User removed successfully');
+        window.location.replace('ManageUsers.php');
+    </SCRIPT>";
 } else {
     echo "error, no userID passed";
 }

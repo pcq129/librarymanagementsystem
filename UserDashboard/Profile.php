@@ -1,5 +1,6 @@
 <?php
 include '../header.php';
+
 $id = $_SESSION['id'];
 
 $fetchDataQuery = "select name,email,address,mobile from users where id ='$id'";
@@ -24,8 +25,9 @@ $fetchData = mysqli_fetch_assoc(mysqli_query($connection, $fetchDataQuery));
                     <input type="text" name="name" class="form-control" id="name" aria-describedby="Name" value="<?= $fetchData['name'] ?>" required>
                 </div>
                 <div class="mb-3">
-                    <label for="MobileNo" class="form-label">MobileNo</label>
-                    <input type="number" name="MobileNo" class="form-control" id="exampleInputEmail1" value="<?= $fetchData['mobile'] ?>" aria-describedby="Mobile Number" required>
+                    <label for="MobileNo" class="form-label" maxlength="10">MobileNo</label>
+                    <input type="tel" name="mobileNo" class="form-control" minlength="10"
+                        maxlength="10" pattern="[0-9]{10}" id="mobileNo" value="<?= $fetchData['mobile'] ?>" aria-describedby="Mobile Number" required>
                 </div>
                 <div class="mb-3">
                     <label for="Address" class="form-label">Residential Address</label>
@@ -49,9 +51,7 @@ $fetchData = mysqli_fetch_assoc(mysqli_query($connection, $fetchDataQuery));
                 </div>
             </form>
 
-            <?php
-            // var_dump($_SERVER);
-            ?>
+
         </div>
     </div>
 </div>

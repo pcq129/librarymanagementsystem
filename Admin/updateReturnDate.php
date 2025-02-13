@@ -13,8 +13,10 @@ if (isset($_SESSION['id']) && isset($_POST['bookID']) && isset($_POST['studentID
     //return date functionlity still pending, the below loc causes some error
     $approveRequestQuery = "update issuedBook set returnDate = '$returnDate' where bookId = '$booksID' && studentId = $studentID ";
     $approveRequest = mysqli_query($connection, $approveRequestQuery);
-    echo "<h1>return details updated successfully.</h1>";
-    echo '<a href="issuedBooks.php" class="btn btn-rounded">Return to issued books</a>';
+    echo "<SCRIPT>
+    alert('Return date updated successfully');
+        window.location.replace('issuedBooks.php');
+    </SCRIPT>";
     // header('location:issuedBooks.php');
 } else {
     echo "error, no bookID passed";

@@ -1,4 +1,5 @@
 <?php
+
 include "headerAdmin.php";
 // homepage for user with admin privilages
 ?>

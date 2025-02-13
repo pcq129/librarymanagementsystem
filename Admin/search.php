@@ -32,7 +32,7 @@ include '../connection.php';
                 </form>
 
                 <?php
-                $username = "select name from users where email ='$email' && isAdmin = '1'";
+                $username = "select name from users where id ='$id' && isAdmin = '1'";
                 $usernameRaw = mysqli_fetch_assoc(mysqli_query($connection, $username));
                 if ($usernameRaw) {
                     echo "<div class='nav-item fw-bold ms-auto'>$usernameRaw[name]</div>";
@@ -44,13 +44,21 @@ include '../connection.php';
             </div>
         </nav>
 
-        <div class="row">
+        <div class="row ms-4">
 
 
             <?php
+
             if (isset($_POST['search'])) {
-                $search = $_POST['search'];
-                $query = "select * from users where name like '%$search%' && isAdmin = 0";
+
+                $search = trim($_POST['search']);
+                if ((!preg_match("/[a-zA-Z0-9]/", $search))) {
+                    echo "invalid search";
+                    die();
+                }
+
+
+                $query = "select * from users where name like '%$search%' || id like '%$search%' && isAdmin = 0 && isDeleted=0";
                 $data = mysqli_query($connection, $query);
 
 
@@ -87,7 +95,7 @@ include '../connection.php';
                     while ($row = mysqli_fetch_assoc($data)) {
             ?>
                     <tr>
-                        <form action="issueBookByAdmin.php" method="POST" onsubmit="return confirm('Are you sure you want to issue this book?');">
+                        <form action="issueBookByAdmin.php" method="POST">
                             <td><?= $row['id'] ?></td>
                             <td><?= $row['name'] ?></td>
                             <td><?= $row['email'] ?></td>
@@ -96,7 +104,7 @@ include '../connection.php';
                             <td>
                                 <div class="me-3"><select class="form-select" name="bookID" aria-label="Select Book" required>
                                         <?php
-                                        $bookFetchQuery = 'select bookName, bookId  from books';
+                                        $bookFetchQuery = 'select bookName, bookId  from books where isDeleted = 0 && quantity>0';
                                         $bookFetch = mysqli_query($connection, $bookFetchQuery);
 
                                         while ($row = mysqli_fetch_assoc($bookFetch)) {

@@ -2,17 +2,43 @@
 //model file for adding new books into books table
 
 include '../session_start.php';
-if (isset($_SESSION['email'])) {
+
+$bookname = trim($_POST['Name']);
+$quantity = trim($_POST['Quantity']);
+$author = trim($_POST['Author']);
+$category = trim($_POST['categoryId']);
+$price = trim($_POST['Price']);
+
+$inputs = array($bookname, $quantity, $author, $category, $price);
+
+foreach ($inputs as $x) {
+    if (!preg_match("/[a-zA-Z0-9]/", $x)) {
+        echo '<bR>Invalid inputs';
+?>
+        <a href="ManageBooks.php">return to Manage Books Page</a>
+        <a href="adminDashboard.php">return to dashboard</a>
+        <a href="categoriesForm.php">return to categories</a>
+
+<?php
+        exit();
+    }
+}
+
+//  && !preg_match("/^[a-zA-Z0-9]{5,}$/", $quantity)  && !preg_match("/^[a-zA-Z0-9]{5,}$/", $author)  && !preg_match("/^[a-zA-Z0-9]{5,}$/", $category) && !preg_match("/^[a-zA-Z0-9]{5,}$/", $price)) {
+//     echo 'Invalid inputs'; 
+?>
+<!--     <a href="ManageBooks.php">return to Manage Books Page</a>
+  <a href="adminDashboard.php">return to dashboard</a> -->
+<?php
+//     exit();
+// }
+if (isset($_SESSION['id'])) {
     if (isset($_POST['Name']) && isset($_POST['Quantity']) && isset($_POST['Author']) && isset($_POST['categoryId']) && isset($_POST['Price'])) {
         include '../connection.php';
         //define variables
-        $bookname = $_POST['Name'];
-        $quantity = $_POST['Quantity'];
-        $author = $_POST['Author'];
-        $category = $_POST['categoryId'];
-        $price = $_POST['Price'];
+
         //check if book already exists
-        $checkBookQuery = 'select  a.authorName, b.bookName, c.categoryName from books as b inner join authors as a on a.authorId = b.authorId inner join category as c on b.categoryId = c.categoryId where b.bookName= "' . $bookname . '" && c.categoryId= "' . $category . '" && a.authorId= "' . $author . '"';
+        $checkBookQuery = 'select  a.authorName, b.bookName, c.categoryName from books as b inner join authors as a on a.authorId = b.authorId inner join category as c on b.categoryId = c.categoryId where b.bookName= "' . $bookname . '" && c.categoryId= "' . $category . '" && a.authorId= "' . $author . '" && b.isDeleted = 0';
         $checkBook = mysqli_query($connection, $checkBookQuery);
         $checkBookRow = mysqli_fetch_assoc($checkBook);
 
@@ -51,16 +77,33 @@ if (isset($_SESSION['email'])) {
             $BookEntryQuery = "insert into books (bookName, authorId, categoryId, quantity, bookPrice, issueCount) values ('$bookname',$author, $category, $quantity, $price, 0)";
             mysqli_query($connection, $BookEntryQuery);
 
+            // header('location:ManageBooks.php');
+            // echo "<h1>book details added successfully.</h1>";
+            // echo '<a href="AdminDashboard.php" class="btn btn-rounded">Return to dashboard</a>';
 
-            echo "<h1>book details added successfully.</h1>";
-            echo '<a href="AdminDashboard.php" class="btn btn-rounded">Return to dashboard</a>';
+            echo "  <SCRIPT>
+            alert('book added successfully');
+                        window.location.replace('ManageBooks.php');
+                    </SCRIPT>";
         } else {
-            echo "<h1>similar book already exists</h1>";
-            echo '<a href="AdminDashboard.php" class="btn btn-rounded">Return to dashboard</a>';
+            echo "  <SCRIPT>
+            alert('similar book already exists');
+            window.location.replace('ManageBooks.php');
+        </SCRIPT>";
+            // echo "<h1>similar book already exists</h1>";
+            // echo '<a href="AdminDashboard.php" class="btn btn-rounded">Return to dashboard</a>';
         }
     } else {
+        echo "  <SCRIPT>
+            alert('error occured');
+            window.location.replace('ManageBooks.php');
+        </SCRIPT>";
         echo "error occured";
     }
 } else {
+    echo "  <SCRIPT>
+    alert('session not valid');
+    window.location.replace('ManageBooks.php');
+</SCRIPT>";
     echo "session not valid, please login";
 }

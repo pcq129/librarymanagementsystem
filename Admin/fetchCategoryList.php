@@ -1,5 +1,4 @@
 <?php
-// include "../session_start.php";
 
 if (isset($_SESSION['id'])) {
     include "../connection.php";
@@ -9,30 +8,32 @@ if (isset($_SESSION['id'])) {
 
     if ($fetchCategoryList->{'num_rows'} > 0) { ?>
         <div class="col-auto">
-            <table class="data-table w-75 ms-auto me-auto">
+            <table class="data-table table table-striped w-75 ms-auto me-auto">
                 <thead>
                     <tr>
-                        <td>Category ID</td>
-                        <td>Category Name</td>
-                        <td colspan="2">Actions</td>
+                        <td scope="col" class="fw-bold">Category ID</td>
+                        <td scope="col" class="fw-bold">Category Name</td>
+                        <td scope="col" class="fw-bold" colspan="2">Actions</td>
                     </tr>
                 </thead>
                 <tbody><?php
                         while ($row = mysqli_fetch_assoc($fetchCategoryList)) {
                         ?><tr>
                             <form action="removeCategory.php" method="POST" onsubmit="return confirm('Are you sure you want delete category');">
-                                <td><?= $row['categoryId'] ?></td>
+                                <td scope="row" class="fw-bold"><?= $row['categoryId'] ?></td>
                                 <input type="hidden" name="catID" id="catID" value="<?= $row['categoryId'] ?>" onsubmit="return confirm('Are you sure you want to delete category?');">
                                 <td><?= $row['categoryName'] ?></td>
                                 <!-- <td><input class="btn btn-danger border-0 mt-2 mb-2" type="submit" value="Edit"></input></td> -->
-                                <td><input class="btn btn-danger border-0 mt-2 mb-2" type="submit" value="Remove"></input></td>
+                                <td><input class="btn btn-danger rounded-pill rounded border-0 mt-2 mb-2" type="submit" value="Remove"></input></td>
                             </form>
                             <td>
-                                <form action="updateCategory.php" method="POST">
-                                    <input type="hidden" name="catID" id="catID" value="<?= $row['categoryId'] ?>">
-                                    <input type="text" name="categoryName" id="categoryName" value="<?= $row['categoryName'] ?>">
-                                    <input class="btn btn-danger border-0 mt-2 mb-2" type="submit" value="Update"></input>
+
+                                <form action="updateCategoryForm.php" method="POST">
+                                    <input type="hidden" name="categoryId" value="<?= $row['categoryId'] ?>">
+                                    <input class="btn btn-danger rounded-pill rounded border-0 mt-2 mb-2" type="submit" value="Edit"></input>
                                 </form>
+
+
                             </td>
                         </tr>
                     <?php

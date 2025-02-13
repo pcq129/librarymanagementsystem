@@ -1,5 +1,4 @@
 <?php
-// include "../session_start.php";
 
 if (isset($_SESSION['id'])) {
     include "../connection.php";
@@ -12,22 +11,22 @@ if (isset($_SESSION['id'])) {
             <table class="data-table w-75 ms-auto me-auto">
                 <thead>
                     <tr>
-                        <td>Book ID</td>
-                        <td>User ID</td>
-                        <td>Price</td>
-                        <td>Quantity</td>
-                        <td>Book Name</td>
-                        <td>Author Name</td>
-                        <td>User Name</td>
-                        <td>Status</td>
-                        <td>Action</td>
+                        <td scope="col">Book ID</td>
+                        <td scope="col">User ID</td>
+                        <td scope="col">Price</td>
+                        <td scope="col">Quantity</td>
+                        <td scope="col">Book Name</td>
+                        <td scope="col">Author Name</td>
+                        <td scope="col">User Name</td>
+                        <td scope="col">Status</td>
+                        <td scope="col">Action</td>
                     </tr>
                 </thead>
                 <tbody><?php
                         while ($row = mysqli_fetch_assoc($fetchBookList)) {
                         ?><tr>
                             <form action="issue.php" method="POST">
-                                <td><?= $row['bookId'] ?></td>
+                                <td scope="row" class="fw-bold"><?= $row['bookId'] ?></td>
                                 <td><?= $row['studentId'] ?></td>
                                 <input type="hidden" name="bookID" id="bookID" value="<?= $row['bookId'] ?>">
                                 <td><?= $row['bookPrice'] ?></td>
@@ -42,7 +41,7 @@ if (isset($_SESSION['id'])) {
                                         <input type="date" name="returnDate" value="<?= date('Y-m-d', strtotime(date('Y-m-d') . '+15 days')) ?>">
                                     </div>
                                 </td>
-                                <td><input class="btn btn-danger border-0 mt-2 mb-2" type="submit" value="Approve"></input></td>
+                                <td><input class="ms-2 btn rounded-pilled rounded btn-danger border-0 mt-2 mb-2" type="submit" value="Approve"></input></td>
                             </form>
                         </tr>
                     <?php
@@ -54,6 +53,7 @@ if (isset($_SESSION['id'])) {
     } else { ?>
         <center>
             <h2>no pending requests !</h2>
+            <a href="AdminDashboard.php">return to dashboard</a>
         </center>
 <?php
     }

@@ -1,5 +1,4 @@
 <?php
-// include "../session_start.php";
 
 if (isset($_SESSION['id'])) {
     include "../connection.php";
@@ -9,34 +8,34 @@ if (isset($_SESSION['id'])) {
     $fetchUserList = mysqli_query($connection, $fetchUserListQuery);
 
     if ($fetchUserList->{'num_rows'} > 0) { ?>
-        <table class="data-table w-75 ms-auto me-auto">
+        <table class="data-table table table-striped w-75 ms-auto me-auto">
             <thead>
                 <tr>
-                    <td>User ID</td>
-                    <td>User Name</td>
-                    <td>User Email</td>
-                    <td>Mobile No</td>
-                    <td colspan="2">Actions</td>
+                    <td scope="col" class="fw-bold">User ID</td>
+                    <td scope="col" class="fw-bold">User Name</td>
+                    <td scope="col" class="fw-bold">User Email</td>
+                    <td scope="col" class="fw-bold">Mobile No</td>
+                    <td scope="col" class="fw-bold" colspan="2">Actions</td>
                 </tr>
             </thead>
             <tbody><?php
                     while ($row = mysqli_fetch_assoc($fetchUserList)) {
                     ?><tr>
                         <form action="removeUser.php" method="POST" onsubmit="return confirm('Are you sure you want to remove this user?');">
-                            <td><?= $row['id'] ?></td>
+                            <td scope="row" class="fw-bold"><?= $row['id'] ?></td>
                             <input type="hidden" name="userID" id="userID" value="<?= $row['id'] ?>">
 
                             <td><?= $row['name'] ?></td>
                             <td><?= $row['email'] ?></td>
                             <td><?= $row['mobile'] ?></td>
                             <td>
-                                <input class="btn btn-danger border-0 mt-2 me-2" type="submit" value="Remove"></input>
+                                <input class="btn btn-danger rounded-pill rounded border-0 mt-2 me-2" type="submit" value="Remove"></input>
                             </td>
                         </form>
                         <form action="updateUserPassword.php" method="POST">
                             <td>
                                 <input type="hidden" name="userId" id="userID" value="<?= $row['id'] ?>">
-                                <input class="btn btn-danger rounded-pill border-0 mt-2 me-2" type="submit" value="Change Password"></input>
+                                <input class="btn btn-danger rounded-pill border-0 mt-2 rounded me-2" type="submit" value="Change Password"></input>
                             </td>
                         </form>
                     </tr>

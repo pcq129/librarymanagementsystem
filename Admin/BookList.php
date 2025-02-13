@@ -1,4 +1,5 @@
-<?php include 'headerAdmin.php' ?>
+<?php include 'headerAdmin.php' ;
+?>
 <div class="row">
     <!-- <div class="col-2">
                 <h2>Filters</h2>

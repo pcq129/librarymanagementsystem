@@ -26,14 +26,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 
                 // echo "<br>";
                 // $userDataRaw = mysqli_fetch_assoc($userData);
-                mysqli_query($connection, "update `users` set password = '$passwordinput' where id='$id'");
-                echo 'password updated successfully <a href="UserDashboard.php">return to dashboard</a>';
+                $updatePass =  mysqli_query($connection, "update `users` set password = '$passwordinput' where id='$id'");
+
+
+
+                echo "<SCRIPT>
+                alert('password updated successfully');
+            window.location.replace('UserDashboard.php');
+        </SCRIPT>";
+                die();
             } else {
-                echo "current password doesn't match <a href='UserDashboard.php'>return to dashboard</a>";
+
+                echo "<script>alert('incorrect current password');
+                window.location.replace('UserDashboard.php')</script>";
+                die();
             }
-            // }
         } else {
-            echo "<div>Please select and enter atleast one field</div></br><a href='UserDashboard.php'>return to dashboard</a>";
+            echo "<SCRIPT>
+            alert('Please select and enter atleast one field');
+            window.location.replace('UserDashboard.php');
+        </SCRIPT>";
+            die();
         }
     } else {
         die('failed to connect mysql' . mysqli_connect_error());

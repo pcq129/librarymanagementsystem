@@ -47,43 +47,34 @@ if (isset($_POST['login']) && $_POST['email'] && $_POST['password'] && validEmai
 
         // functions and queries for authentication with single table for users and admin
 
-        $query = "select * from users where email = '$email'";
+        $query = "select * from users where email = '$email' && isDeleted = 0";
         $query_run_user = mysqli_query($connection, $query);
-        // echo "checking user permisision";
         if ($query_run_user->{'num_rows'} > 0) {
-            // echo "checking user permisisio1n";
-
-            //checking for credentials as a user
             while ($row = mysqli_fetch_assoc($query_run_user)) {
-                // echo "checking user permisision2";
-
-
-                if ($row['email'] == $email) {
-                    // echo "checking user permisision3";
-
-
-
-                    if ($row['password'] == $password) {
-                        // echo "checking user permisision4";
-
-                        $_SESSION['id'] = $row['id'];
-                        if ($row['isAdmin'] == 1) {
-                            header("Location:../Admin/AdminDashboard.php");
-                        } else {
-                            header("Location:../UserDashboard/userDashboard.php");
-                        }
+                if ($row['email'] == $email && $row['password'] == $password) {
+                    $_SESSION['id'] = $row['id'];
+                    if ($row['isAdmin'] == 1) {
+                        header("Location:../Admin/AdminDashboard.php");
                     } else {
-                        echo "<center><span>Error (invalid credentials) </span><br><a href='landingPage.php'>Return to login</a></center>";
+                        header("Location:../UserDashboard/userDashboard.php");
                     }
                 } else {
-                    echo "<center><h1>exception</h1></center>";
+                    echo "<SCRIPT>
+                    alert('Error (invalid credentials) ');
+            window.location.replace('landingPage.php');
+        </SCRIPT>";
                 }
             }
         } else {
-            echo "<center><h1>email not found </h1></center>";
+            echo "<SCRIPT>
+            alert('Email not found');
+            window.location.replace('landingPage.php');
+        </SCRIPT>";
         }
     }
     if (mysqli_connect_errno()) {
         die('failed to connect mysql' . mysqli_connect_error());
     }
+} else {
+    echo "error retrieving data";
 }

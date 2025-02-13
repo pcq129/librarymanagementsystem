@@ -4,7 +4,6 @@
 
 
 // include 'signup.php';
-// var_dump($_POST);
 // exit();
 
 
@@ -16,14 +15,32 @@ include '../connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit']) && validEmail($_POST['email'])) {
     if ($_POST['password'] == $_POST['confirmPassword']) {
+        $name = trim($_POST['name']);
+        $mobileno = trim($_POST['mobileNo']);
+        $address = trim($_POST['address']);
+        $email = trim($_POST['email']);
+        $password = md5($_POST['password']);
 
-        if (isset($_POST['name']) && isset($_POST['mobileno']) && isset($_POST['address']) && isset($_POST['email']) && filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) && isset($_POST['password']) && isset($_POST['submit'])) {
+        $validate = array($name, $mobileno, $address, $email, $password);
+        foreach ($validate as $input) {
+            if (strlen($input) == 0) {
+                echo "<SCRIPT>
+                alert('Invalid Inputs');
+            window.location.replace('signup.php');
+        </SCRIPT>";
+                die();
+            }
+        }
+        if (!strlen($_POST['mobileNo']) == 10) {
+            echo "<SCRIPT>
+            alert('Invalid Mobile Number');
+            window.location.replace('signup.php');
+        </SCRIPT>";
+            die();
+        }
 
-            $name = $_POST['name'];
-            $mobileno = $_POST['mobileno'];
-            $address = $_POST['address'];
-            $email = $_POST['email'];
-            $password = md5($_POST['password']);
+        if (isset($_POST['name']) && isset($_POST['mobileNo']) && isset($_POST['address']) && isset($_POST['email']) && filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) && isset($_POST['password']) && isset($_POST['submit'])) {
+
 
             //function for email validataion
 
@@ -44,15 +61,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit']) && validEmai
                 $query = mysqli_query($connection, $sql);
 
                 if ($query) {
-                    echo "<h1>data added successfullty</h1>";
-                    echo '<a href="landingPage.php" class="btn btn-rounded">Return to Login page</a>';
+                    echo "<SCRIPT>
+                    alert('User added successfully');
+            window.location.replace('landingPage.php');
+        </SCRIPT>";
+                    // echo "<h1>User added successfully</h1>";
+                    // echo '<a href="landingPage.php" class="btn btn-rounded">Return to Login page</a>';
                 } else {
                     echo "error occured. $mysqli_connect_error() ";
                 }
             } else {
                 // header("Location:signup.php");
-                echo "<h1>email already registered !! use different email or login</h1>";
-                echo '<a href="landingPage.php" class="btn btn-rounded">Return to Login page</a>';
+                echo "<SCRIPT>
+                alert('email already registered');
+                window.location.replace('landingPage.php');
+            </SCRIPT>";
+                // echo "<h1> !! use different email or login</h1>";
+                // echo '<a href="landingPage.php" class="btn btn-rounded">Return to Login page</a>';
 
                 // echo '<script>let text;
                 //         if (confirm("Email already exists") == true) {
@@ -62,13 +87,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit']) && validEmai
                 //     </script>';
             }
         } else {
-            echo "details missing";
-            echo '<a href="landingPage.php" class="btn btn-rounded">Return to Login page</a>';
+            echo "<SCRIPT>
+            alert('details missing');
+            window.location.replace('landingPage.php');
+        </SCRIPT>";
         }
     } else {
-        echo "<center><h1>passwords doesn't match</h1><br> <a href='signup.php'>return to signup</a></center>";
+        echo "<SCRIPT>
+        alert('passwords doesn't match');
+        window.location.replace('signup.php');
+    </SCRIPT>";
     }
 } else {
-    echo "invalid email";
-    echo '<a href="landingPage.php" class="btn btn-rounded">Return to Login page</a>';
+    echo "<SCRIPT>
+    alert('Invalid Email');
+    window.location.replace('landingPage.php');
+</SCRIPT>";
 }

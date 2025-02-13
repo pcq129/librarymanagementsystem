@@ -13,10 +13,10 @@ $fetchBookDataRow = mysqli_fetch_assoc($fetchBookData);
             <h2 class="fw-bolder text-info-emphasis">Update Book Data</h2>
         </div>
         <div class="d-flex justify-content-center mb-2">
-            <h5>Please create your library credentials</h5>
+            <h5>Please enter new details</h5>
         </div>
         <form action='updateBook.php' method="POST" ">
-            <input type="hidden" name="bookId" id="bookId" value="<?= $_POST['bookID'] ?>">
+            <input type=" hidden" name="bookId" id="bookId" value="<?= $_POST['bookID'] ?>">
 
             <div class="mb-3">
                 <label for="Book Title" class="form-label">Book Title</label>

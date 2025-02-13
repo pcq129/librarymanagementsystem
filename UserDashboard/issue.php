@@ -27,24 +27,36 @@ if (isset($_SESSION['id'])) {
                 $issuedBook = mysqli_query($connection, $issueBookQuery);
                 $newQuantity = $quantityNo['quantity'] - 1;
                 $updateQuantityQuery = "update books quantity = $newQuantity where bookId = $book_id";
+                echo "<SCRIPT>
+                alert('Book Requested Successfully');
+                window.location.replace('search.php');
+            </SCRIPT>";
 ?>
-                <center>
+                <!-- <center>
                     <h1>Book requested successfully.</h1>
                     <a href="search.php">return to search page</a>
                     <br>
                     <a href="UserDashboard.php">return to Dashboard</a>
-                </center>
+                </center> -->
             <?php
             } else {
-                echo "no more copies of books available";
+                echo "<SCRIPT>
+                alert('no more copies of books available');
+                window.location.replace('search.php');
+            </SCRIPT>";
+                // echo "no more copies of books available";
             }
-        } else { ?>
-            <center>
+        } else { 
+            echo "<SCRIPT>
+            alert('User have already requested one book');
+            window.location.replace('search.php');
+        </SCRIPT>";?>
+            <!-- <center>
                 <h1>User have already requested one book</h1>
                 <a href="search.php">return to search page</a>
                 <br>
                 <a href="UserDashboard.php">return to Dashboard</a>
-            </center>
+            </center> -->
 <?php
 
         }
